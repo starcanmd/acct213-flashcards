@@ -626,60 +626,6 @@ Inventory turnover = 22,000 / 4,275 = 5.15 → days = 365 / 5.15 = 71 days</div>
  ["Cash from operations","The Same","n/a","Cash paid in 2025 is 12.0 either way. Accrual choices move expense between periods, never cash."]])},
 
 // ---------- Canvas self-study problems (sessions 1 to 9) ----------
-{t:"FSA", s:"Self-study · Session 1 · P1-1", q:`<p>Procter &amp; Gamble reports the following ($ millions):</p>
-${tbl([["Year","Total assets","Total liabilities","Net income"],["2023","120,829","73,764","14,738"],["2024","122,370","71,811","14,974"]])}
-<p>Stockholders' equity was $46,854 at the end of 2022. Compute P&amp;G's 2024 return on equity (on average equity) and its 2024 debt-to-equity ratio. Did each improve or deteriorate versus 2023?</p>`,
- a: ans("2024 ROE = 30.68% (down from 31.38%) · 2024 debt-to-equity = 1.42 (down from 1.57)") + `<div class="calc">Equity = assets − liabilities: 2023 = 47,065; 2024 = 50,559
-ROE 2024 = 14,974 / [(47,065 + 50,559)/2] = 30.68%
-ROE 2023 = 14,738 / [(46,854 + 47,065)/2] = 31.38%
-D/E 2024 = 71,811 / 50,559 = 1.42     D/E 2023 = 73,764 / 47,065 = 1.57</div><p>ROE slipped slightly while leverage fell. Both remain well above and below, respectively, Fortune 500 medians. Use average equity for ROE and year-end balances for debt-to-equity.</p>`},
-{t:"FS", s:"Self-study · Session 1 · P1-3", q:`<p>Abercrombie &amp; Fitch, year ended February 1, 2025 ($ millions): net sales 4,948.6; cost of goods sold 1,773.9; other expenses including income taxes 2,600.7; total assets 3,299.9; total liabilities 1,948.6; cash from operations 710.4; cash from investing (297.7); cash from financing (534.9); exchange rate effect (7.1); beginning cash 909.7.</p>
-<p>Compute (a) gross profit and net income, (b) stockholders' equity, (c) ending cash, and (d) the percentage of assets financed by owners versus creditors.</p>`,
- a: ans("(a) Gross profit $3,174.7M, net income $574.0M · (b) Equity $1,351.3M · (c) Ending cash $780.4M · (d) 40.9% owners, 59.1% creditors") + `<div class="calc">Gross profit = 4,948.6 − 1,773.9 = 3,174.7;  NI = 3,174.7 − 2,600.7 = 574.0
-Equity = 3,299.9 − 1,948.6 = 1,351.3
-Cash: 909.7 + 710.4 − 297.7 − 534.9 − 7.1 = 780.4
-Owners 1,351.3 / 3,299.9 = 40.9%;  creditors 1,948.6 / 3,299.9 = 59.1%</div>`},
-{t:"FS", s:"Self-study · Session 2 · P2-9", q:`<p>Lambert Services, December transactions: (1) issued common stock for $21,000 cash; (2) paid $2,250 for supplies and training materials, used immediately; (3) received a $1,500 invoice for advertising, unpaid; (4) borrowed $45,000 from the bank; (5) received $3,600 cash for counseling services; (6) billed clients $20,400 for services; (7) paid $6,600 salary; (8) paid $1,110 utilities; (9) paid a $2,700 dividend; (10) bought land for $39,000 cash; (11) paid $300 interest.</p>
-<p>What are December revenues, expenses, and net income? Which transactions do not touch the income statement?</p>`,
- a: ans("Revenue $24,000 · Expenses $11,760 · Net income $12,240 · Transactions 1, 4, 9 and 10 bypass income") + `<div class="calc">Revenue = 3,600 cash + 20,400 billed = 24,000 (accrual: billing counts)
-Expenses = 2,250 + 1,500 + 6,600 + 1,110 + 300 = 11,760 (advertising counts though unpaid)
-NI = 12,240;  ending cash = 17,640;  liabilities = 46,500 (45,000 note + 1,500 payable)</div><p>Stock issuance and borrowing are financing, land is an asset swap, and dividends reduce retained earnings directly. None are revenue or expense.</p>`},
-{t:"CF", s:"Self-study · Session 3 · P4-1", q:`<p>Net income $202,500. Depreciation expense $37,500. Gain on sale of assets $7,500. Accounts receivable increased $15,000. Prepaid expenses decreased $4,500. Accounts payable increased $9,000. Wages payable decreased $6,000.</p>
-<p>Compute net cash from operating activities under the indirect method.</p>`,
- a: ans("Net cash from operations = $225,000") + `<div class="calc">  202,500  net income
-+  37,500  depreciation
-−   7,500  gain on sale (belongs in investing)
-−  15,000  AR increase
-+   4,500  prepaid decrease
-+   9,000  AP increase
-−   6,000  wages payable decrease
-= 225,000</div>`},
-{t:"CF", s:"Self-study · Session 3 · P4-4", q:`<p>Arctic Company, Year 8: net loss $(33,600); depreciation $17,600; gain on sale of land $20,000 (land sold for $56,000 cash); accounts receivable decreased $6,400; inventory decreased $4,800; prepaid advertising decreased $2,400; accounts payable decreased $11,200; interest payable increased $4,800.</p>
-<p>What is net cash from operating activities, and where does the $56,000 appear?</p>`,
- a: ans("Operating cash flow = $(28,800) · The $56,000 is an investing inflow") + `<div class="calc">(33,600) + 17,600 − 20,000 + 6,400 + 4,800 + 2,400 − 11,200 + 4,800 = (28,800)</div><p>A company can post a loss and still have the gain subtracted: the $20,000 gain sits inside the net loss, and the full $56,000 proceeds go to investing. Removing the gain avoids counting it twice.</p>`},
-{t:"REV", s:"Self-study · Session 4 · P6-1", q:`<p>Take-Two Interactive defers part of game revenue for post-sale service. Its deferred net revenue liability rose from $1,059.5 million to $1,083.5 million during the year ended March 2025. Revenue recognized in the year was $5,633.6 million.</p>
-<p>(a) Did customers buy more or less than the revenue recognized? (b) Estimate customer purchases (billings) for the year.</p>`,
- a: ans("(a) More · (b) Billings ≈ $5,657.6 million") + `<div class="calc">Billings = revenue + increase in deferred revenue
-         = 5,633.6 + (1,083.5 − 1,059.5) = 5,657.6</div><p>A growing deferred revenue balance means sales ran ahead of recognition. The change in the liability is a leading indicator of future revenue.</p>`},
-{t:"REV", s:"Self-study · Session 4 · P6-2", q:`<p>Elliot Company signs a $600,000 contract to train 400 employees over three years, with total expected costs of $245,000. In Year 1 it trains 125 employees and incurs $91,000 of cost.</p>
-<p>Compute Year 1 revenue and gross profit under (1) an output measure (employees trained) and (2) an input measure (costs incurred).</p>`,
- a: ans("Output method: revenue $187,500, gross profit $110,937.50 · Input method: revenue $222,857, gross profit $131,857") + `<div class="calc">Output: 125/400 = 31.25% → revenue 187,500; expense 125 × 612.50 = 76,562.50
-Input:  91,000/245,000 = 37.14% → revenue 222,857; expense 91,000</div><p>Both recognize the same $355,000 total gross profit over the contract. The choice is about which measure faithfully depicts progress: output methods fail when work in process controlled by the customer is not captured by the output count (ASC 606-10-55-17).</p>`},
-{t:"AR", s:"Self-study · Session 5 · E6-14", q:`<p>Beginning accounts receivable $61,000 and allowance for uncollectible accounts $3,950. During the year: credit sales $586,500; collections $575,000; write-offs of $1,800, $1,200 and $450. Bad debt expense is estimated at 0.8% of credit sales.</p>
-<p>Compute ending gross receivables, the ending allowance, and net receivables.</p>`,
- a: ans("Gross AR $69,050 · Allowance $5,192 · Net $63,858") + `<div class="calc">AR:        61,000 + 586,500 − 575,000 − 3,450 = 69,050
-Allowance: 3,950 − 3,450 + (586,500 × 0.8% = 4,692) = 5,192
-Net = 69,050 − 5,192 = 63,858</div><p>Under the percentage-of-sales method the provision is set directly (0.8% of sales) and the ending allowance falls out of the roll-forward. Under the aging method it is the reverse.</p>`},
-{t:"AR", s:"Self-study · Session 5 · E6-12", q:`<p>Opening allowance for uncollectible accounts $6,525. Write-offs during 2022 $5,745. A year-end aging of the $571,500 gross receivables indicates $7,050 should be uncollectible.</p>
-<p>(a) Bad debt expense for 2022? (b) Net receivables on the balance sheet? (c) Had write-offs been $1,500 higher, what happens to bad debt expense?</p>`,
- a: ans("(a) $6,270 · (b) $564,450 · (c) Higher by $1,500") + `<div class="calc">Unadjusted allowance = 6,525 − 5,745 = 780 (credit)
-Bad debt expense = required 7,050 − 780 = 6,270
-Net AR = 571,500 − 7,050 = 564,450</div><p>With an aging approach the ending allowance is fixed by the aging; anything the write-offs take out has to be put back by the provision. So more write-offs mean more expense, dollar for dollar.</p>`},
-{t:"AR", s:"Self-study · Session 5 · E6-17", q:`<p>A company estimates bad debts at 1% of credit sales. Over three years: sales $600,800, $700,800, $777,600; collections $586,400, $691,200, $750,400; write-offs $4,240, $4,640, $5,200. Beginning balances were zero.</p>
-<p>What are accounts receivable and the allowance at the end of Year 3? Does the 1% rate look wrong?</p>`,
- a: ans("AR $37,120 · Allowance $6,712 · No clear evidence the rate is wrong") + `<div class="calc">AR = 2,079,200 − 2,028,000 − 14,080 = 37,120
-Bad debt expense total = 1% × 2,079,200 = 20,792
-Allowance = 20,792 − 14,080 = 6,712</div><p>Test the rate by watching allowance as a share of receivables: 17%, 27%, 18% across the three years. If the rate were too high the allowance would keep growing faster than receivables; too low and it would shrink. No consistent drift here.</p>`},
 {t:"AR", s:"Self-study · Session 5 · Honeywell A/R", q: slide(`Honeywell International, 2020 10-K ($ millions). Accounts receivable, net was $6,827 at December 31, 2020 and $7,493 at December 31, 2019. The allowance for doubtful accounts was $202 and $146. Gross receivables were therefore $7,029 and $7,638.<br><br>Had Honeywell (always) used the specific write-off approach instead of the allowance method, would the following financial statement items be higher than, lower than or the same as what is currently recorded? (ignore any income tax effects)`,
  ["Write-offs of Accounts receivable in 2020","Net income in 2020","Total shareowners' equity at December 31, 2020"]),
  a: ans("Same · Higher by $56M · Higher by $202M") + vt([
@@ -689,44 +635,11 @@ Allowance = 20,792 − 14,080 = 6,712</div><p>Test the rate by watching allowanc
 {t:"AR", s:"Self-study · Session 5 · Honeywell A/R", q:`<p>Honeywell, 2020 ($ millions): allowance for doubtful accounts $202; accounts receivable, net $6,827. Ignore taxes.</p>
 <p>(a) Honeywell's auditors initially believed the allowance should be $247 million. Had Honeywell used $247 million, would comprehensive income in 2020 be higher, lower, or the same, and by how much? (b) Had Honeywell written off a doubtful $20 million account in 2020 that it has not yet written off, would total assets be higher, lower, or the same? (c) Had Honeywell sold its entire receivables portfolio for $6,929 million just before year end, would retained earnings be higher, lower, or the same, and by how much?</p>`,
  a: ans("(a) Lower by $45M · (b) The same · (c) Higher by $102M") + `<ul><li>(a) A $45M larger allowance means $45M more provision. Comprehensive income includes net income, so it falls by 45.</li><li>(b) A write-off reduces gross receivables and the allowance equally. Net receivables, and total assets, are unchanged.</li><li>(c) Proceeds of 6,929 exceed the 6,827 net book value, so a 102 gain flows to retained earnings.</li></ul>`},
-{t:"INV", s:"Self-study · Session 6 · E7-3", q:`<p>Beginning inventory 150 units at $46. Purchases during the year: 975 at $42, then 825 at $38, then 300 at $36. Ending inventory is 525 units.</p>
-<p>Compute ending inventory and cost of goods sold under FIFO, average cost, and LIFO. Which method gives the highest gross profit here, and why?</p>`,
- a: ans("FIFO: EI $19,350, COGS $70,650 · Average: EI $21,000, COGS $69,000 · LIFO: EI $22,650, COGS $67,350 · LIFO gives the highest gross profit because prices were falling") + `<div class="calc">Goods available = 6,900 + 40,950 + 31,350 + 10,800 = 90,000 (2,250 units)
-FIFO EI  = 300 × 36 + 225 × 38 = 19,350
-Avg cost = 90,000 / 2,250 = 40 → EI = 525 × 40 = 21,000
-LIFO EI  = 150 × 46 + 375 × 42 = 22,650</div><p>The usual rule (LIFO lowers income) assumes rising prices. Here costs fell from $46 to $36, so LIFO puts the cheapest, newest units into COGS and reports the highest profit.</p>`},
-{t:"INV", s:"Self-study · Session 6 · E7-8", q:`<p>Casey's General Stores (LIFO), $ millions: beginning inventory 376.1; ending inventory 428.7; cost of goods sold 11,515.0; sales 14,862.9. The LIFO reserve rose from 138.962 to 151.461 during the year.</p>
-<p>(a) Estimate inventory purchases. (b) Compute cost of goods sold and gross profit margin as reported and pro forma under FIFO.</p>`,
- a: ans("(a) Purchases $11,567.6M · (b) FIFO COGS $11,502.5M; gross margin 22.53% as reported vs 22.61% under FIFO") + `<div class="calc">Purchases = COGS + ending − beginning = 11,515.0 + 428.7 − 376.1 = 11,567.6
-FIFO COGS = 11,515.0 − (151.461 − 138.962) = 11,502.5
-GPM: 3,347.9 / 14,862.9 = 22.53%;  3,360.4 / 14,862.9 = 22.61%</div><p>The difference equals the $12.5M change in the LIFO reserve. It is small because Casey's turns inventory about 20 times a year, so very little old cost sits in the balance.</p>`},
 {t:"INV", s:"Self-study · Session 6 · ExxonMobil", q:`<p>ExxonMobil ($ millions): crude oil, products and merchandise inventories (LIFO) of $22,979 at the end of 2025 and $19,444 at the end of 2024. The LIFO reserve was $7,000 and $10,000. Assume a 21% tax rate. The footnote mentions LIFO liquidations in 2025.</p>
 <p>(a) What would inventories be under FIFO at each year end? (b) How much cumulative income tax has LIFO postponed as of the end of 2025? (c) Did LIFO raise or lower 2025 pre-tax income relative to FIFO, and by how much? (d) If oil prices rise in 2026, what happens to the reserve?</p>`,
  a: ans("(a) $29,979M and $29,444M · (b) ≈ $1,470M · (c) Raised it by $3,000M · (d) The reserve grows") + `<div class="calc">FIFO = LIFO + reserve: 22,979 + 7,000 = 29,979;  19,444 + 10,000 = 29,444
 Taxes postponed = 7,000 × 21% = 1,470
 ΔReserve = 7,000 − 10,000 = −3,000 → LIFO COGS lower than FIFO by 3,000 → pre-tax income higher by 3,000</div><p>A shrinking reserve means LIFO is flattering income (falling oil prices plus liquidation of old cheap layers), and ExxonMobil paid more tax in 2025 than it would have under FIFO. Rising prices in 2026 reverse this.</p>`},
-{t:"PPE", s:"Self-study · Session 7 · E8-2", q:`<p>A machine is bought for $240,000 plus $5,000 freight and $7,000 installation. Expected residual value $19,500, useful life 5 years, straight-line. After exactly 4 years it is sold for $35,000 cash.</p>
-<p>What is the capitalized cost, the annual depreciation, and the gain or loss on sale?</p>`,
- a: ans("Cost $252,000 · Depreciation $46,500 per year · Loss on sale $31,000") + `<div class="calc">Cost = 240,000 + 5,000 + 7,000 = 252,000 (freight and installation are capitalized)
-Depreciation = (252,000 − 19,500) / 5 = 46,500
-After 4 years: accumulated 186,000; NBV 66,000
-Gain/(loss) = 35,000 − 66,000 = (31,000)</div>`},
-{t:"PPE", s:"Self-study · Session 7 · E8-7", q:`<p>A delivery van cost $54,400, with a $4,000 residual value and a 6-year life, straight-line. It is sold at the end of year 3.</p>
-<p>What is the net book value at sale, and the gain or loss if the sale price is (1) $29,200, (2) $30,000, (3) $24,000?</p>`,
- a: ans("NBV $29,200 · (1) No gain or loss · (2) Gain $800 · (3) Loss $5,200") + `<div class="calc">Depreciation to date = (54,400 − 4,000) / 6 × 3 = 25,200
-NBV = 54,400 − 25,200 = 29,200
-Gain/(loss) = proceeds − NBV</div><p>Gain or loss is just the difference between what you got and what was left on the books. A "gain" says earlier depreciation was too fast, not that the company made money on the van.</p>`},
-{t:"INT", s:"Self-study · Session 8 · E8-19", q:`<p>In an acquisition a company records three intangibles at fair value: a patent $280,000 (3-year life), a trademark $700,000 (indefinite life), and a noncompetition agreement $420,000 (5-year life).</p>
-<p>What is total amortization expense in Year 1?</p>`,
- a: ans("$177,333") + `<div class="calc">Patent        280,000 / 3 = 93,333
-Trademark     indefinite → 0 (tested for impairment instead)
-Noncompete    420,000 / 5 = 84,000
-Total                       177,333</div>`},
-{t:"INT", s:"Self-study · Session 8 · E8-20", q:`<p>A company spends $80,000 on R&amp;D for a new process, then pays $14,000 to register a patent on it, amortized straight-line over 10 years. After 3.25 years of amortization it sells the patent for $25,000.</p>
-<p>How much of the $94,000 is capitalized, what is annual amortization, and what is the gain on sale?</p>`,
- a: ans("Capitalized $14,000 (the R&D is expensed) · Amortization $1,400 per year · Gain $15,550") + `<div class="calc">Accumulated amortization at sale = 14,000 / 10 × 3.25 = 4,550
-NBV = 14,000 − 4,550 = 9,450
-Gain = 25,000 − 9,450 = 15,550</div><p>Under U.S. GAAP only the legal cost of registering the patent is capitalized. The research that created its value was expensed when incurred, which is why the sale shows a large gain.</p>`},
 {t:"INT", s:"Self-study · Session 8 · BMC Software", q: slide(`BMC Software, fiscal 2011 ($ millions). Software development costs, net rose from $145.5 at the end of fiscal 2010 to $193.8 at the end of fiscal 2011. BMC capitalized $124.0 of development costs in 2011, of which $115.8 was paid in cash during the year.<br><br>Had BMC given software development costs the same treatment as other internally developed intangibles (expensed as incurred), would the following financial statement items be higher than, lower than or the same as what is currently recorded? (ignore any income tax effects)`,
  ["Total assets at March 31, 2011","Total stockholders' equity at March 31, 2011","Net earnings in fiscal 2011","Cash from operating activities in fiscal 2011","Cash from investing activities in fiscal 2011"]),
  a: ans("Lower by $193.8M · Lower by $193.8M · Lower by $48.3M · Lower by $115.8M · Higher by $115.8M") + vt([
@@ -735,14 +648,6 @@ Gain = 25,000 − 9,450 = 15,550</div><p>Under U.S. GAAP only the legal cost of 
  ["Net earnings 2011","Lower","$48.3M","Amortization = 145.5 + 124.0 − 193.8 = 75.7. Expensing 124.0 instead of 75.7 costs 48.3. The balance grew, so expensing hurts this year."],
  ["Cash from operations","Lower","$115.8M","The cash actually paid in 2011 moves from investing to operating."],
  ["Cash from investing","Higher","$115.8M","Mirror image; total cash unchanged."]]) + `<p class="note">Incentive question from the case: declaring technological feasibility earlier capitalizes more cost, lifting current earnings, assets and equity, at the price of higher amortization later and audit or litigation risk.</p>`},
-{t:"SEC", s:"Self-study · Session 9 · M12-5", q:`<p>Wu Company holds 8,500 shares of another company's stock as a passive investment. During the year it received $11,050 of dividends and the share price rose from $12 to $13.</p>
-<p>What investment income does Wu report for the year?</p>`,
- a: ans("$19,550") + `<div class="calc">Dividends                 11,050
-Unrealized gain 8,500 × (13 − 12) = 8,500
-Total                     19,550</div><p>Equity securities are carried at fair value with all gains and losses, realized or not, in net income. The AFS/OCI route is only available for debt securities.</p>`},
-{t:"SEC", s:"Self-study · Session 9 · E12-20", q:`<p>At year end a company holds: trading equity securities that cost $345,750 and are now worth $337,950; available-for-sale Treasury bonds and notes that cost $531,000 and are now worth $520,050; and equity-method investments with a carrying value of $354,000.</p>
-<p>At what amounts are the three groups reported, and where do the unrealized losses appear?</p>`,
- a: ans("Trading $337,950 · AFS $520,050 · Equity method $354,000 · Trading loss of $7,800 in the income statement; AFS loss of $10,950 in OCI (AOCI on the balance sheet)") + `<p>Trading and AFS both sit at fair value; the difference is whether the unrealized loss hits net income (trading) or accumulated other comprehensive income (AFS). Equity-method investments are not marked to market at all.</p>`},
 {t:"SEC", s:"Self-study · Session 9 · Costco", q: slide(`Costco, fiscal 2025 ($ millions). Accumulated other comprehensive loss improved from $(1,828) at September 1, 2024 to $(1,770) at August 31, 2025. Government and agency securities are classified as available-for-sale and measured with Level 2 inputs; their cost is $783, carrying (fair) value $786, so $3 of cumulative unrealized gain sits in AOCI.<br><br>(1) Had the accounting rules required Costco to recognize all gains and losses in net income, would Net income in fiscal 2025 be higher, lower or the same? (2) Had Costco accounted for these securities as Held to Maturity, would the following be higher, lower or the same?`,
  ["Net income in fiscal 2025 (all gains and losses through NI)","Total equity at August 31, 2025 (under Held to Maturity)","Net income in fiscal 2025 (under Held to Maturity)"]),
  a: ans("Higher by $58M · Lower by $3M · Same") + vt([
