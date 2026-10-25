@@ -72,9 +72,9 @@ h1, h2, h3 { margin: 0; font-weight: 500; }
 
 /* Card */
 .scene { perspective: 1600px; }
-.card { position: relative; width: 100%; min-height: 440px; transition: transform .55s cubic-bezier(.4,.1,.2,1); transform-style: preserve-3d; cursor: pointer; }
+.card { position: relative; width: 100%; min-height: 420px; transition: transform .55s cubic-bezier(.4,.1,.2,1); transform-style: preserve-3d; cursor: pointer; }
 .card.flipped { transform: rotateY(180deg); }
-.face { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; background: var(--paper); border: 1px solid var(--stroke); border-radius: var(--radius); padding: 24px 26px 66px; display: flex; flex-direction: column; overflow: auto; box-shadow: 0 18px 40px -24px rgba(15, 42, 34, 0.45); }
+.face { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; background: var(--paper); border: 1px solid var(--stroke); border-radius: var(--radius); padding: 24px 26px 18px; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 18px 40px -24px rgba(15, 42, 34, 0.45); }
 .face.back { transform: rotateY(180deg); background: var(--warm); }
 .face .top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 14px; }
 .label { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); }
@@ -95,9 +95,27 @@ td, th { padding: 5px 14px 5px 0; text-align: right; border-bottom: 1px solid va
 td:first-child, th:first-child { text-align: left; padding-right: 20px; }
 th { font-weight: 600; color: var(--ink-3); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; }
 .note { font-size: 13.5px; color: var(--ink-3); }
-.hint { position: absolute; left: 26px; right: 26px; bottom: 16px; font-size: 12px; color: var(--ink-3); display: flex; justify-content: space-between; gap: 10px; letter-spacing: 0.04em; }
+.hint { margin-top: auto; padding-top: 18px; font-size: 12px; color: var(--ink-3); display: flex; justify-content: space-between; gap: 10px; letter-spacing: 0.04em; }
 .calc { background: var(--cream); border: 1px solid var(--stroke); border-radius: 10px; padding: 12px 14px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 13.5px; color: var(--ink); margin: 6px 0 12px; overflow-x: auto; white-space: pre; line-height: 1.5; }
 code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .92em; }
+/* Slide-style items */
+.stem { margin: 0 0 14px; }
+.items { list-style: none; margin: 0 0 16px; padding: 0; display: grid; gap: 8px; }
+.items li { display: grid; grid-template-columns: 34px 1fr; gap: 8px; align-items: baseline; font-size: 17px; }
+.items li span:first-child { color: var(--ink-3); font-variant-numeric: tabular-nums; }
+.hls { background: var(--cream); border: 1px solid var(--stroke); border-radius: 10px; padding: 10px 14px; font-size: 13.5px; color: var(--ink-2); display: grid; gap: 6px; max-width: 520px; }
+.hls .opts { display: flex; justify-content: space-between; gap: 12px; font-weight: 500; color: var(--ink); }
+.hls .blank { display: inline-block; width: 120px; border-bottom: 1px solid var(--ink-3); vertical-align: baseline; margin: 0 6px; }
+.a:has(.vt) { max-width: none; }
+.vt { width: 100%; margin: 4px 0 14px; font-size: 14.5px; table-layout: fixed; }
+.vt th, .vt td { white-space: normal; text-align: left; vertical-align: top; padding: 8px 10px 8px 0; }
+.vt th:nth-child(2), .vt td:nth-child(2) { width: 90px; }
+.vt th:nth-child(3), .vt td:nth-child(3) { width: 110px; font-variant-numeric: tabular-nums; }
+.vt td.v { font-weight: 600; color: var(--ink); }
+.vt td.v.hi { color: var(--green); }
+.vt td.v.lo { color: var(--rose); }
+.vt td.n { color: var(--ink-2); }
+@media (max-width: 640px) { .vt th:nth-child(3), .vt td:nth-child(3) { width: 80px; } .vt { font-size: 13.5px; } }
 .done { text-align: center; padding: 40px 20px; }
 .done h2 { font-family: var(--serif); font-size: 30px; margin-bottom: 8px; }
 
@@ -134,9 +152,8 @@ code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fo
   .hero p { font-size: 16px; margin-top: 12px; }
   .chips { gap: 6px; margin-top: 16px; }
   .chip { font-size: 12px; padding: 5px 10px; }
-  .face { padding: 18px 18px 60px; }
-  .hint { left: 18px; right: 18px; }
-  .card { min-height: 500px; }
+  .face { padding: 18px 18px 16px; }
+  .card { min-height: 420px; }
   .section-head h2 { font-size: 24px; }
 }
 </style>
@@ -214,6 +231,11 @@ const T = {
 };
 const tbl = (rows) => `<div class="tw"><table>${rows.map((r,i)=>`<tr>${r.map(c=>i===0?`<th>${c}</th>`:`<td>${c}</td>`).join("")}</tr>`).join("")}</table></div>`;
 const ans = (s) => `<p class="ans">${s}</p>`;
+const ROMAN = ["(i)","(ii)","(iii)","(iv)","(v)","(vi)"];
+const slide = (stem, items, note) => `<p class="stem">${stem}</p><ol class="items">${items.map((it,i)=>`<li><span>${ROMAN[i]}</span><span>${it}</span></li>`).join("")}</ol>
+<div class="hls"><div class="opts"><span>Higher</span><span>Lower</span><span>The Same</span></div><div>If higher / lower, by how much? $<span class="blank"></span> million</div></div>${note?`<p class="note" style="margin-top:12px">${note}</p>`:""}`;
+const cls = v => v.startsWith("Higher")?"hi":v.startsWith("Lower")?"lo":"";
+const vt = (rows) => `<div class="tw"><table class="vt"><tr><th>Item</th><th>Answer</th><th>Amount</th><th>Why</th></tr>${rows.map((r,i)=>`<tr><td>${ROMAN[i]} ${r[0]}</td><td class="v ${cls(r[1])}">${r[1]}</td><td class="n">${r[2]}</td><td class="n">${r[3]}</td></tr>`).join("")}</table></div>`;
 
 const CARDS = [
 // ---------- Statements & transactions ----------
@@ -512,6 +534,94 @@ AR turnover = 32,000 / 7,200 = 4.44 → DSO = 365 / 4.44 = 82 days
 Avg inventory = (4,150 + 4,400)/2 = 4,275
 Inventory turnover = 22,000 / 4,275 = 5.15 → days = 365 / 5.15 = 71 days</div>
 <p>Use net sales for receivables and cost of sales for inventory, with averages in the denominator. A LIFO firm's inventory turnover looks artificially high because LIFO inventory is carried at old, low costs; add back the LIFO reserve to compare with FIFO firms.</p>`},
+
+// ---------- Slide-style "Had they (always)..." sets ----------
+{t:"AR", q: slide(`Charter Communications, 10-K 2025 ($ millions). Allowance for doubtful accounts was $204 at the end of 2024 and $219 at the end of 2025. Gross receivables were $3,301 and $3,899. The 2025 provision for doubtful accounts was $746 and write-offs were $731.<br><br>Had Charter (always) used the "direct write-off" approach to account for doubtful accounts (instead of the Allowance method), would the following financial statement items be higher than, lower than or the same as what is currently recorded? (ignore any income tax effects)`,
+ ["Write-offs of Receivables in 2025","Total Stockholders' equity at December 31, 2025","Net income in 2025","Cash from operating activities in 2025"]),
+ a: ans("Same · Higher by $219M · Higher by $15M · Same") + vt([
+ ["Write-offs 2025","The Same","n/a","Write-offs reflect which customers actually failed to pay. The method only changes when the expense is booked."],
+ ["Equity, Dec 31 2025","Higher","$219M","The ending allowance is expense recognized ahead of actual defaults. Without it, receivables and retained earnings are both higher by the full balance."],
+ ["Net income 2025","Higher","$15M","Direct write-off expense would be the $731 written off, versus the $746 provision. 746 − 731 = 15, which is also the growth in the allowance (219 − 204)."],
+ ["Cash from operations 2025","The Same","n/a","Neither the provision nor the write-off involves cash."]])},
+{t:"AR", q: slide(`Charter's allowance for doubtful accounts is $219 million at December 31, 2025, which management set as 5.62% of gross receivables. Suppose management had instead concluded that only 5.0% of gross receivables of $3,899 million would go uncollected, and had set the allowance accordingly.<br><br>Would the following items be higher than, lower than or the same as what is currently recorded? (ignore any income tax effects)`,
+ ["Provision for doubtful accounts in 2025","Write-offs of Receivables in 2025","Accounts receivable, net at December 31, 2025","Retained earnings at December 31, 2025"]),
+ a: ans("Lower by $24M · Same · Higher by $24M · Higher by $24M") + vt([
+ ["Provision 2025","Lower","$24M","Desired allowance = 5.0% × 3,899 = 195, vs 219 currently. Provision = ending − beginning + write-offs, so a 24 lower ending balance means a 24 lower provision."],
+ ["Write-offs 2025","The Same","n/a","The estimate changed, not the customers who defaulted."],
+ ["AR, net","Higher","$24M","Gross receivables are unchanged; a smaller contra-asset leaves net receivables higher."],
+ ["Retained earnings","Higher","$24M","Lower expense this year flows straight to retained earnings. Earlier years are unaffected because only the 2025 year-end estimate changed."]])},
+{t:"REV", q: slide(`Microsoft reports Unearned revenue (customer payments received before the service is delivered) of $50,000 million at June 30, 2025 and $45,000 million at June 30, 2024. Microsoft recognizes this revenue ratably as the service is provided.<br><br>Had Microsoft (always) recognized revenue in full when the customer is billed, would the following financial statement items be higher than, lower than or the same as what is currently recorded? (ignore any income tax effects)`,
+ ["Total revenue in fiscal 2025","Total liabilities at June 30, 2025","Retained earnings at June 30, 2025","Cash from operating activities in fiscal 2025"]),
+ a: ans("Higher by $5,000M · Lower by $50,000M · Higher by $50,000M · Same") + vt([
+ ["Revenue FY2025","Higher","$5,000M","Billings exceeded revenue recognized by the growth in the liability, 50,000 − 45,000."],
+ ["Total liabilities","Lower","$50,000M","Unearned revenue would not exist."],
+ ["Retained earnings","Higher","$50,000M","Every dollar in the liability is cash collected that has not yet reached income. The whole balance would already be in retained earnings."],
+ ["Cash from operations","The Same","n/a","Customers paid the same amounts on the same dates."]])},
+{t:"INT", q: slide(`BMC Software capitalizes software development costs after technological feasibility. Capitalized software development costs, net were $330 million at December 31, 2024 and $310 million at December 31, 2025. Amortization in 2025 was $120 million. All costs are cash-based.<br><br>Had BMC (always) accounted for software development costs the same way as its other R&D (expensed when incurred), would the following financial statement items be higher than, lower than or the same as what is currently recorded? (ignore any income tax effects)`,
+ ["Total stockholders' equity at December 31, 2025","Net income in 2025","Net cash from operating activities in 2025","Net cash from investing activities in 2025"]),
+ a: ans("Lower by $310M · Higher by $20M · Lower by $100M · Higher by $100M") + vt([
+ ["Equity, Dec 31 2025","Lower","$310M","The net asset is cost paid but not yet expensed. Expensing it all means retained earnings lower by the ending balance."],
+ ["Net income 2025","Higher","$20M","Capitalized in 2025 = 310 − 330 + 120 = 100. Expensing swaps 120 of amortization for 100 of new spend: expense lower by 20."],
+ ["Cash from operations","Lower","$100M","The $100M paid for development moves from investing to operating. Amortization is non-cash and irrelevant here."],
+ ["Cash from investing","Higher","$100M","The same $100M leaves investing. Total cash is unchanged."]])},
+{t:"INT", q: slide(`Honeywell expenses all R&D as incurred. An internal analysis shows that under the IFRS treatment, Cash from investing activities in 2025 would be lower by $300 million, and Total assets would be higher by $1,900 million at December 31, 2025 and by $2,550 million at December 31, 2024. All R&D costs are cash-based.<br><br>Had Honeywell (always) accounted for R&D costs under IFRS, would the following financial statement items be higher than, lower than or the same as what is currently recorded? (ignore any income tax effects)`,
+ ["Retained earnings at December 31, 2025","Amortization expense in 2025","Net income in 2025","Cash and cash equivalents at December 31, 2025"]),
+ a: ans("Higher by $1,900M · Higher by $950M · Lower by $650M · Same") + vt([
+ ["Retained earnings","Higher","$1,900M","Cumulative R&D not yet expensed equals the capitalized asset on the balance sheet."],
+ ["Amortization 2025","Higher","$950M","Asset roll-forward: 2,550 + 300 capitalized − amortization = 1,900, so amortization = 950."],
+ ["Net income 2025","Lower","$650M","R&D expense lower by 300 (capitalized) but amortization higher by 950. Net −650, which equals the fall in the asset (2,550 − 1,900)."],
+ ["Cash, Dec 31 2025","The Same","n/a","Cash spent on R&D is identical; only its classification moves from operating to investing."]])},
+{t:"INV", q: slide(`Honeywell uses LIFO for part of its inventories. The LIFO reserve was $1,000 million at December 31, 2024 and $1,200 million at December 31, 2025, with no LIFO liquidation. Assume a 21% tax rate that has not changed, LIFO conformity for tax, and all income taxes paid in the year due.<br><br>Had Honeywell (always) used FIFO for all inventories, would the following financial statement items be higher than, lower than or the same as what is currently recorded?`,
+ ["Cost of products sold in 2025","Net income in 2025","Inventories at December 31, 2025","Retained earnings at December 31, 2025","Cash from operating activities in 2025"]),
+ a: ans("Lower by $200M · Higher by $158M · Higher by $1,200M · Higher by $948M · Lower by $42M") + vt([
+ ["Cost of products sold","Lower","$200M","ΔLIFO reserve = COGS(LIFO) − COGS(FIFO) = 1,200 − 1,000."],
+ ["Net income 2025","Higher","$158M","200 more pre-tax income, less 21% tax = 158."],
+ ["Inventories","Higher","$1,200M","FIFO inventory = LIFO inventory + LIFO reserve."],
+ ["Retained earnings","Higher","$948M","Cumulative pre-tax income higher by 1,200, less cumulative tax of 252 (1,200 × 21%)."],
+ ["Cash from operations","Lower","$42M","Higher taxable income in 2025 means 200 × 21% = 42 more tax paid. The inventory itself is non-cash."]])},
+{t:"INV", q: slide(`At December 31, 2025 a retailer recorded a $40 million write-down of inventories to net realizable value (included in cost of sales). No write-downs were recorded in prior years.<br><br>Had the retailer not recorded this write-down, would the following financial statement items be higher than, lower than or the same as what is currently recorded? (ignore any income tax effects)`,
+ ["Inventories at December 31, 2025","Gross profit in 2025","Cash from operating activities in 2025","Cost of sales in 2026 (assuming the written-down goods are sold in 2026)"]),
+ a: ans("Higher by $40M · Higher by $40M · Same · Higher by $40M") + vt([
+ ["Inventories","Higher","$40M","The write-down reduced the carrying amount of inventory by 40."],
+ ["Gross profit 2025","Higher","$40M","The charge sits in cost of sales, so removing it lifts gross profit and net income by 40."],
+ ["Cash from operations","The Same","n/a","A write-down is a non-cash charge. Under the indirect method it is already added back."],
+ ["Cost of sales 2026","Higher","$40M","Without the write-down the goods carry a cost 40 higher into 2026, so cost of sales is higher when they are sold. Write-downs shift expense across periods; total expense over the life of the goods is the same."]])},
+{t:"PPE", q: slide(`At the start of 2023 Costco acquired equipment for $900 million, with no residual value, depreciated straight-line over 10 years. The equipment is still in use.<br><br>Had Costco (always) depreciated this equipment over 15 years instead of 10, would the following financial statement items be higher than, lower than or the same as what is currently recorded? (ignore any income tax effects)`,
+ ["Depreciation expense in 2025","Accumulated depreciation at December 31, 2025","Retained earnings at December 31, 2024","Total equity at December 31, 2025","Cash from operating activities in 2025"]),
+ a: ans("Lower by $30M · Lower by $90M · Higher by $60M · Higher by $90M · Same") + vt([
+ ["Depreciation 2025","Lower","$30M","900/10 = 90 per year versus 900/15 = 60 per year."],
+ ["Accumulated depreciation","Lower","$90M","Three years (2023 to 2025) at 30 less each year."],
+ ["Retained earnings, end 2024","Higher","$60M","Two years of lower depreciation (2023 and 2024)."],
+ ["Total equity, end 2025","Higher","$90M","Cumulative lower depreciation through 2025. The asset is still held, so the difference has not reversed through a sale."],
+ ["Cash from operations","The Same","n/a","Depreciation is non-cash. The 900 was an investing outflow in 2023."]])},
+{t:"PPE", q: slide(`In 2025 Honeywell sold property, plant and equipment with a net book value of $70 million for $100 million in cash, recording a $30 million gain.<br><br>Had Honeywell not sold this PP&E in 2025, would the following financial statement items be higher than, lower than or the same as what is currently recorded? (ignore any income tax effects, and assume no additional depreciation on the asset in 2025)`,
+ ["Net income in 2025","Total assets at December 31, 2025","Cash from investing activities in 2025","Cash from operating activities in 2025"]),
+ a: ans("Lower by $30M · Lower by $30M · Lower by $100M · Same") + vt([
+ ["Net income 2025","Lower","$30M","No sale, no gain."],
+ ["Total assets","Lower","$30M","The company keeps a $70 asset instead of $100 of cash."],
+ ["Cash from investing","Lower","$100M","Proceeds from sales of PP&E are an investing inflow."],
+ ["Cash from operations","The Same","n/a","Net income is lower by 30, but the 30 gain is no longer subtracted in the reconciliation. The two cancel. Gains on asset sales never belong in operating cash."]])},
+{t:"SEC", q: slide(`Costco classifies its marketable debt securities as available-for-sale. Accumulated other comprehensive income includes net unrealized gains on these securities of $3 million at August 31, 2025 and $1 million at September 1, 2024.<br><br>Had Costco (always) accounted for all these investments as "Held to Maturity", would the following financial statement items be higher than, lower than or the same as what is currently recorded? (ignore any income tax effects)`,
+ ["Total assets at August 31, 2025","Total shareholders' equity at August 31, 2025","Net income in fiscal 2025","Other comprehensive income in fiscal 2025"]),
+ a: ans("Lower by $3M · Lower by $3M · Same · Lower by $2M") + vt([
+ ["Total assets","Lower","$3M","HTM is carried at amortized cost; the $3M fair value uplift would never be booked."],
+ ["Equity","Lower","$3M","The $3M sits in AOCI today. Under HTM there is no AOCI entry."],
+ ["Net income","The Same","n/a","Neither AFS nor HTM sends unrealized gains through earnings. Only interest revenue, identical under both."],
+ ["OCI fiscal 2025","Lower","$2M","AFS booked 3 − 1 = 2 of unrealized gain in OCI this year. HTM books none."]])},
+{t:"SEC", q: slide(`Same Costco facts: net unrealized gains on available-for-sale debt securities in AOCI of $3 million at August 31, 2025 and $1 million at September 1, 2024.<br><br>Had Costco (always) accounted for all these investments as "Trading" securities, would the following financial statement items be higher than, lower than or the same as what is currently recorded? (ignore any income tax effects)`,
+ ["Net income in fiscal 2025","Retained earnings at August 31, 2025","Total shareholders' equity at August 31, 2025","Total assets at August 31, 2025"]),
+ a: ans("Higher by $2M · Higher by $3M · Same · Same") + vt([
+ ["Net income 2025","Higher","$2M","Trading runs the year's unrealized gain (3 − 1) through earnings instead of OCI."],
+ ["Retained earnings","Higher","$3M","Cumulative unrealized gains move from AOCI into retained earnings."],
+ ["Total equity","The Same","n/a","AOCI lower by 3, retained earnings higher by 3. Same total."],
+ ["Total assets","The Same","n/a","Both methods carry the securities at fair value."]])},
+{t:"CF", q: slide(`A start-up paid $12 million on April 1, 2025 for a 12-month facility lease and recorded $3 million of prepaid rent at December 31, 2025. It also accrued $0.3 million of interest on a bank loan at year end, payable June 30, 2026.<br><br>Had the company instead expensed the full lease payment when paid and recorded interest only when paid, would the following financial statement items be higher than, lower than or the same as what is currently recorded? (ignore any income tax effects)`,
+ ["Net income in 2025","Total assets at December 31, 2025","Total liabilities at December 31, 2025","Cash from operating activities in 2025"]),
+ a: ans("Lower by $2.7M · Lower by $3.0M · Lower by $0.3M · Same") + vt([
+ ["Net income 2025","Lower","$2.7M","Rent expense higher by 3.0 (12 instead of 9); interest expense lower by 0.3 (none instead of 0.3). Net −2.7."],
+ ["Total assets","Lower","$3.0M","No prepaid rent asset."],
+ ["Total liabilities","Lower","$0.3M","No accrued interest payable."],
+ ["Cash from operations","The Same","n/a","Cash paid in 2025 is 12.0 either way. Accrual choices move expense between periods, never cash."]])},
 ];
 
 // ---------- state & rendering ----------
@@ -557,7 +667,7 @@ function renderCard(){
   $("fQ").innerHTML = c.q; $("bA").innerHTML = c.a;
   $("prev").disabled = v.length<2; $("next").disabled = v.length<2;
   $("bar").style.width = ((pos+1)/v.length*100)+"%";
-  card.querySelectorAll(".face").forEach(f=>f.scrollTop=0);
+  fitCard();
   updateTally();
 }
 function updateTally(){
@@ -576,6 +686,13 @@ function updateTally(){
     g.appendChild(row);
   });
 }
+function fitCard(){
+  const card=$("card"); const faces=card.querySelectorAll(".face");
+  card.style.height="auto"; let hgt=0;
+  faces.forEach(f=>{ f.style.position="relative"; f.style.transform="none"; hgt=Math.max(hgt,f.offsetHeight); f.style.position=""; f.style.transform=""; });
+  card.style.height=Math.max(420,hgt+2)+"px";
+}
+window.addEventListener("resize", fitCard);
 function renderAll(){ renderRail(); renderCard(); }
 function flip(){ flipped=!flipped; $("card").classList.toggle("flipped", flipped); }
 function step(d){ const v=visible(); if(v.length<2) return; pos=(pos+d+v.length)%v.length; renderCard(); }
