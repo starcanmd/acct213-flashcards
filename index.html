@@ -1,0 +1,605 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ACCT 213 Exam 1 Flashcards</title>
+<meta name="description" content="Flip-card practice deck for ACCT 213 Exam 1 at Stanford GSB, sessions 1 to 10.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Nightwalkers palette. Deep green ink, warm cream, Leland yellow, rose for contrast. */
+  --cream: #f3f1e6;
+  --warm: #faf8f1;
+  --paper: #ffffff;
+  --ink: #0f2a22;
+  --ink-2: #3d4f49;
+  --ink-3: #6f7d78;
+  --stroke: #e3dfd0;
+  --stroke-dark: #a9a593;
+  --yellow: #ffd96f;
+  --yellow-deep: #f2bf2a;
+  --yellow-light: #fff3cc;
+  --green: #037052;
+  --green-light: #dcefe7;
+  --rose: #c24d3c;
+  --rose-light: #f8e3dd;
+  --radius: 14px;
+  --sans: "Instrument Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --serif: "Instrument Serif", Georgia, "Times New Roman", serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body { font-family: var(--sans); color: var(--ink); background: var(--cream); -webkit-font-smoothing: antialiased; font-size: 16px; line-height: 1.5; }
+button { font: inherit; cursor: pointer; }
+h1, h2, h3 { margin: 0; font-weight: 500; }
+.serif { font-family: var(--serif); font-weight: 400; letter-spacing: -0.01em; }
+.wrap { max-width: 1080px; margin: 0 auto; padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); }
+
+/* Topbar */
+.topbar { position: sticky; top: 0; z-index: 10; background: rgba(243, 241, 230, 0.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--stroke); }
+.topbar-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 60px; }
+.brand { display: flex; align-items: center; gap: 10px; font-size: 15px; }
+.brand-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--yellow); }
+.brand small { color: var(--ink-3); font-size: 13px; }
+.tabs { display: flex; gap: 4px; }
+.tab { background: transparent; border: 1px solid transparent; border-radius: 999px; padding: 7px 14px; color: var(--ink-2); font-size: 14px; }
+.tab:hover { background: rgba(34,34,34,0.05); }
+.tab[aria-pressed="true"] { background: var(--ink); color: var(--yellow); }
+.who { font-size: 13px; color: var(--ink-3); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.who b { color: var(--green); font-weight: 600; }
+.who .m { color: var(--rose); font-weight: 600; }
+
+/* Hero */
+.hero { padding-top: 48px; padding-bottom: 20px; }
+.eyebrow { font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--green); margin-bottom: 14px; font-weight: 600; }
+.eyebrow::before { content: ""; display: inline-block; width: 18px; height: 3px; background: var(--yellow-deep); margin-right: 10px; vertical-align: middle; }
+.hero h1 { font-size: 48px; line-height: 1.02; max-width: 760px; text-wrap: balance; }
+.hero h1 em { font-style: italic; color: var(--green); }
+.hero p { max-width: 620px; color: var(--ink-2); font-size: 17px; margin: 16px 0 0; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+.chip { font-size: 13px; padding: 6px 12px; border-radius: 999px; background: var(--paper); border: 1px solid var(--stroke); color: var(--ink); display: inline-flex; gap: 6px; align-items: center; }
+.chip small { color: var(--ink-3); font-size: 12px; }
+.chip[aria-pressed="true"] { background: var(--green); border-color: var(--green); color: #fff; }
+.chip[aria-pressed="true"] small { color: #fff; opacity: .8; }
+.chip:focus-visible, .tab:focus-visible, .btn:focus-visible, .card:focus-visible { outline: 2px solid var(--yellow); outline-offset: 2px; }
+
+/* Meter */
+.meter { height: 8px; background: var(--paper); border: 1px solid var(--stroke); border-radius: 999px; overflow: hidden; margin: 18px 0 16px; }
+.meter > i { display: block; height: 100%; width: 0; background: var(--green); transition: width .3s ease; }
+
+/* Card */
+.scene { perspective: 1600px; }
+.card { position: relative; width: 100%; min-height: 440px; transition: transform .55s cubic-bezier(.4,.1,.2,1); transform-style: preserve-3d; cursor: pointer; }
+.card.flipped { transform: rotateY(180deg); }
+.face { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; background: var(--paper); border: 1px solid var(--stroke); border-radius: var(--radius); padding: 24px 26px 66px; display: flex; flex-direction: column; overflow: auto; box-shadow: 0 18px 40px -24px rgba(15, 42, 34, 0.45); }
+.face.back { transform: rotateY(180deg); background: var(--warm); }
+.face .top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 14px; }
+.label { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); }
+.topic-pill { display: inline-block; font-size: 12px; padding: 3px 10px; border-radius: 999px; background: var(--green-light); color: var(--green); font-weight: 600; letter-spacing: 0.04em; }
+.face.back .topic-pill { background: var(--yellow); color: var(--ink); }
+.q { font-family: var(--serif); font-size: clamp(19px, 2.4vw, 23px); line-height: 1.38; max-width: 66ch; letter-spacing: -0.01em; }
+.q p, .a p { margin: 0 0 10px; }
+.a { font-size: 15.5px; max-width: 68ch; color: var(--ink-2); }
+.a .ans { font-family: var(--serif); font-size: clamp(20px, 2.6vw, 25px); font-weight: 400; color: var(--ink); margin: 0 0 14px; line-height: 1.25; }
+.a .ans::before { content: ""; display: block; width: 28px; height: 3px; background: var(--yellow-deep); margin-bottom: 10px; }
+.a ul { padding-left: 18px; margin: 0 0 10px; }
+.a li { margin-bottom: 6px; }
+.a li::marker { color: var(--green); }
+.a b { color: var(--ink); font-weight: 600; }
+table { border-collapse: collapse; font-size: 13.5px; margin: 8px 0 14px; font-variant-numeric: tabular-nums; }
+.tw { overflow-x: auto; max-width: 100%; }
+td, th { padding: 5px 14px 5px 0; text-align: right; border-bottom: 1px solid var(--stroke); white-space: nowrap; }
+td:first-child, th:first-child { text-align: left; padding-right: 20px; }
+th { font-weight: 600; color: var(--ink-3); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; }
+.note { font-size: 13.5px; color: var(--ink-3); }
+.hint { position: absolute; left: 26px; right: 26px; bottom: 16px; font-size: 12px; color: var(--ink-3); display: flex; justify-content: space-between; gap: 10px; letter-spacing: 0.04em; }
+.calc { background: var(--cream); border: 1px solid var(--stroke); border-radius: 10px; padding: 10px 12px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12.5px; color: var(--ink); margin: 6px 0 12px; overflow-x: auto; white-space: pre; line-height: 1.5; }
+code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .92em; }
+.done { text-align: center; padding: 40px 20px; }
+.done h2 { font-family: var(--serif); font-size: 30px; margin-bottom: 8px; }
+
+/* Controls */
+.controls { display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between; align-items: center; margin-top: 18px; }
+.controls .grp { display: flex; gap: 8px; flex-wrap: wrap; }
+.btn { background: var(--green); color: #fff; border: none; border-radius: 10px; padding: 11px 16px; font-size: 14.5px; }
+.btn.ghost { background: transparent; color: var(--ink); border: 1px solid var(--stroke-dark); }
+.btn.yellow { background: var(--yellow); color: var(--ink); }
+.btn.rose { background: transparent; color: var(--rose); border: 1px solid var(--rose); }
+.btn.ghost[aria-pressed="true"] { background: var(--ink); color: var(--yellow); border-color: var(--ink); }
+.btn:disabled { opacity: .45; cursor: default; }
+.kbd { font-size: 12.5px; color: var(--ink-3); margin-top: 14px; }
+.kbd kbd { border: 1px solid var(--stroke); border-radius: 5px; padding: 1px 6px; background: var(--paper); font: inherit; font-size: 12px; }
+
+/* Coverage */
+.section { padding-top: 36px; padding-bottom: 28px; }
+.section-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; margin-bottom: 14px; gap: 16px; }
+.section-head h2 { font-size: 28px; }
+.section-head .meta { color: var(--ink-3); font-size: 14px; }
+.tgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 10px; }
+.trow { display: flex; justify-content: space-between; gap: 10px; font-size: 14px; padding: 12px 14px; background: var(--paper); border: 1px solid var(--stroke); border-radius: 10px; min-width: 0; }
+.trow span:last-child { font-size: 12.5px; color: var(--ink-3); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.footer { padding-top: 24px; padding-bottom: 60px; color: var(--ink-3); font-size: 13px; }
+
+@media (prefers-reduced-motion: reduce) { .card { transition: none; } .meter > i { transition: none; } }
+@media (max-width: 820px) {
+  .topbar-inner { height: auto; padding-top: 10px; padding-bottom: 8px; display: grid; grid-template-columns: 1fr auto; row-gap: 8px; align-items: center; }
+  .tabs { grid-column: 1 / -1; display: flex; gap: 6px; overflow-x: auto; white-space: nowrap; scrollbar-width: none; margin: 0 -20px; padding: 0 20px 2px; }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tab { flex: 0 0 auto; font-size: 13.5px; }
+  .hero { padding-top: 28px; padding-bottom: 14px; }
+  .hero h1 { font-size: 34px; }
+  .hero p { font-size: 16px; margin-top: 12px; }
+  .chips { gap: 6px; margin-top: 16px; }
+  .chip { font-size: 12px; padding: 5px 10px; }
+  .face { padding: 18px 18px 60px; }
+  .hint { left: 18px; right: 18px; }
+  .card { min-height: 500px; }
+  .section-head h2 { font-size: 24px; }
+}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <div class="brand"><span class="brand-dot"></span><span>ACCT 213</span><small>Exam 1 deck</small></div>
+    <nav class="tabs" aria-label="Study modes">
+      <button class="tab" id="tabAll" aria-pressed="true">All cards</button>
+      <button class="tab" id="tabMissed" aria-pressed="false">Review again</button>
+      <button class="tab" id="tabShuffle" aria-pressed="false">Shuffle</button>
+    </nav>
+    <div class="who" id="tally"></div>
+  </div>
+</header>
+
+<main>
+  <section class="hero wrap">
+    <div class="eyebrow">Sessions 1 to 10 · Exam Monday, October 26</div>
+    <h1 class="serif">Flip, answer, then check <em>by how much</em>.</h1>
+    <p>Each card shows the question alone. Flip it for the answer and the reasoning, written the way Professor Kasznik asks on the exam. Figures are invented practice data in $ millions unless stated.</p>
+    <div class="chips" id="rail"></div>
+    <div class="meter"><i id="bar"></i></div>
+
+    <div class="scene" id="scene">
+      <div class="card" id="card" tabindex="0" role="button" aria-label="Flashcard, press to flip">
+        <div class="face front">
+          <div class="top"><span class="topic-pill" id="fTopic"></span><span class="label" id="fNum"></span></div>
+          <div class="q" id="fQ"></div>
+          <div class="hint"><span>Question</span><span>Click or press space to flip</span></div>
+        </div>
+        <div class="face back">
+          <div class="top"><span class="topic-pill">Answer</span><span class="label" id="bNum"></span></div>
+          <div class="a" id="bA"></div>
+          <div class="hint"><span>Mark it below, then next</span><span>Click to see the question again</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <div class="grp">
+        <button class="btn ghost" id="prev">Previous</button>
+        <button class="btn" id="flip">Flip</button>
+        <button class="btn ghost" id="next">Next</button>
+      </div>
+      <div class="grp">
+        <button class="btn yellow" id="got">Got it</button>
+        <button class="btn rose" id="missed">Review again</button>
+      </div>
+      <div class="grp">
+        <button class="btn ghost" id="shuffle" hidden>Shuffle</button>
+        <button class="btn ghost" id="missedOnly" hidden>Only missed</button>
+        <button class="btn ghost" id="reset">Reset marks</button>
+      </div>
+    </div>
+    <div class="kbd"><kbd>Space</kbd> flip · <kbd>→</kbd> next · <kbd>←</kbd> previous · <kbd>G</kbd> got it · <kbd>R</kbd> review again</div>
+  </section>
+
+  <section class="section wrap">
+    <div class="section-head"><h2 class="serif">Coverage by topic</h2><span class="meta">Marks are saved in this browser only</span></div>
+    <div class="tgrid" id="tgrid"></div>
+  </section>
+</main>
+
+<footer class="footer wrap">
+  ACCT 213 Financial Accounting (Accelerated) · Stanford GSB · Autumn 2026. Practice questions written from the course quizzes, assignments, and the Fall 2025 midterm. All company figures are illustrative.
+</footer>
+
+<script>
+const T = {
+  FS:"Statements & transactions", CF:"Earnings & cash flows", REV:"Revenue recognition",
+  AR:"Receivables", INV:"Inventories", PPE:"Fixed assets", INT:"Intangibles, R&D, software",
+  SEC:"Marketable securities", FSA:"Financial statement analysis"
+};
+const tbl = (rows) => `<div class="tw"><table>${rows.map((r,i)=>`<tr>${r.map(c=>i===0?`<th>${c}</th>`:`<td>${c}</td>`).join("")}</tr>`).join("")}</table></div>`;
+const ans = (s) => `<p class="ans">${s}</p>`;
+
+const CARDS = [
+// ---------- Statements & transactions ----------
+{t:"FS", q:`<p>On April 1, 2025 a start-up pays $12 million in cash for a one-year lease on a manufacturing facility (lease term April 1, 2025 to March 31, 2026). On July 1, 2025 it borrows $6 million at 10%, with interest payable each June 30 and principal due in 2028. The company has a December 31 year end. Ignore taxes.</p>
+<p>For fiscal 2025, what are (a) rent expense, (b) prepaid rent at December 31, (c) interest expense, and (d) interest payable at December 31?</p>`,
+ a:ans("(a) Rent expense $9.0M, (b) Prepaid rent $3.0M, (c) Interest expense $0.3M, (d) Interest payable $0.3M")+
+ `<div class="calc">Rent used: 9 of 12 months x $12M = $9.0M expense; 3 months remain = $3.0M prepaid asset
+Interest: $6M x 10% x 6/12 = $0.3M accrued; nothing paid until June 30, 2026</div>
+<p>Cash paid in 2025 for these two items is $12M, yet expense recognized is only $9.3M. The difference sits on the balance sheet as a $3.0M asset (prepaid) and a $0.3M liability (accrued interest). This is the Radiation Shields logic: expenses follow the period of use, not the cash payment.</p>`},
+{t:"FS", q:`<p>A company spends $3 million in cash during the year on research for a new product and expenses it, as U.S. GAAP requires. Ignore taxes.</p>
+<p>Had the company instead <em>capitalized</em> the $3 million as an asset (with no amortization yet), would each of the following be higher, lower, or the same, and by how much? Total assets, total liabilities, shareholders' equity, net income, cash from operations.</p>`,
+ a:ans("Assets higher by $3M · Liabilities the same · Equity higher by $3M · Net income higher by $3M · Cash from operations higher by $3M")+
+ `<ul><li>Capitalizing moves the $3M from the income statement to the balance sheet, so net income and retained earnings (equity) rise by $3M and an asset appears.</li>
+<li>No liability is involved; the cash was paid either way.</li>
+<li>Total cash is unchanged, but the payment is reclassified from an operating outflow (expensed R&D) to an investing outflow (purchase of a long-lived asset), so CFO is higher by $3M and CFI lower by $3M.</li></ul>
+<p class="note">Capitalize vs. expense never changes total cash. It changes timing of expense and the <em>classification</em> of the cash flow.</p>`},
+{t:"FS", q:`<p>On December 15, 2025 a company signs a $1 million contract to deliver product on March 15, 2026; the customer pays 30 days after delivery. Separately, in Fall 2025 it shipped $23 million of product, of which $9.6 million is uncollected at year end (a reputable customer, expected to pay in January).</p>
+<p>How much revenue does the company recognize in fiscal 2025 from these two items, and what appears on the December 31, 2025 balance sheet?</p>`,
+ a:ans("Revenue 2025: $23 million. Balance sheet: Accounts receivable $9.6 million. Nothing for the $1 million contract.")+
+ `<ul><li>Revenue is recognized when control transfers (shipment/delivery), not when the contract is signed or cash collected. The $23M shipped in 2025 is 2025 revenue; the $9.6M unpaid portion is a receivable.</li>
+<li>The signed $1M contract is an executory contract: no delivery, no cash, no entry. It becomes revenue on March 15, 2026.</li></ul>`},
+
+// ---------- Earnings & cash flows ----------
+{t:"CF", q:`<p>Compute cash from operations using the indirect method from the following fiscal 2025 data ($ millions):</p>
+${tbl([["Item","Amount"],["Net income","2,000"],["Depreciation and amortization","500"],["Gain on sale of equipment","50"],["Increase in accounts receivable","300"],["Decrease in inventories","100"],["Increase in accounts payable","150"],["Proceeds from sale of equipment","180"]])}`,
+ a:ans("Cash from operations = $2,400 million")+
+ `<div class="calc">  2,000  Net income
++   500  D&A (non-cash)
+-    50  Gain on sale (remove; proceeds go to investing)
+-   300  AR increase (sales not yet collected)
++   100  Inventory decrease
++   150  AP increase
+= 2,400</div>
+<p>The $180M of proceeds belongs in investing activities. The $50M gain is subtracted so it is not double counted (it is inside net income and inside the $180M investing inflow).</p>`},
+{t:"CF", q:`<p>A company reports net income of $4,072 million. Accumulated other comprehensive loss moved from $(93) million at the start of the year to $(42) million at the end. There were no reclassifications out of AOCI other than through OCI.</p>
+<p>What is your best estimate of comprehensive income for the year?</p>`,
+ a:ans("Comprehensive income ≈ $4,123 million")+
+ `<div class="calc">OCI = change in AOCI = (42) - (93) = +51
+Comprehensive income = NI + OCI = 4,072 + 51 = 4,123</div>
+<p>AOCI accumulates OCI the way retained earnings accumulates net income. A smaller accumulated loss means positive OCI for the year (for example unrealized gains on available-for-sale debt securities or favorable currency translation).</p>`},
+
+// ---------- Revenue recognition ----------
+{t:"REV", q:`<p>A warehouse club collects annual membership fees in advance and recognizes them ratably over 12 months. Fiscal 2025 data ($ millions):</p>
+${tbl([["","End FY2025","End FY2024"],["Deferred membership fees (liability)","2,600","2,350"]])}
+<p>Cash collected from membership fees during fiscal 2025 was $5,100 million. How much membership fee revenue was recognized in fiscal 2025?</p>`,
+ a:ans("Membership fee revenue recognized = $4,850 million")+
+ `<div class="calc">Beginning deferred  2,350
++ Cash collected    5,100
+- Revenue recognized    X
+= Ending deferred   2,600   →  X = 4,850</div>
+<p>Revenue recognized is less than cash collected because the liability grew by $250M: more was deferred this year than released. Any time you are asked for revenue, cash, or a deferred balance, roll the liability forward.</p>`},
+{t:"REV", q:`<p>Same warehouse club. Deferred membership fees were $2,600 million at the end of fiscal 2025 and $2,350 million at the end of fiscal 2024. Ignore taxes.</p>
+<p>Had the company always recognized the full membership fee as revenue immediately when collected, would each of the following be higher, lower, or the same, and by how much? Total revenue in 2025, retained earnings at end of 2025, cash from operations in 2025.</p>`,
+ a:ans("Revenue 2025 higher by $250M · Retained earnings higher by $2,600M · Cash from operations the same")+
+ `<ul><li><b>Revenue</b>: with no deferral, 2025 revenue equals cash collected. The difference from current revenue is the change in the deferred balance, +$250M.</li>
+<li><b>Retained earnings</b>: the entire ending liability is cash already collected but not yet in income. With no deferral it would all be in retained earnings: +$2,600M. The liability would be zero, so total assets are unchanged.</li>
+<li><b>CFO</b>: customers paid the same cash on the same dates. Recognition timing does not touch cash.</li></ul>
+<p class="note">Identical structure to the Delta and United quiz: equity by the ending balance, income by the change, cash the same.</p>`},
+{t:"REV", q:`<p>A retailer offers its members a home insurance policy designed and fulfilled by a third-party insurer. The retailer processes the member's payment and passes 80% of it to the insurer. Non-members would pay $1,800 for the same policy; the retailer sells it to members for $1,500.</p>
+<p>How does this transaction affect the retailer's sales revenue in the year? Increase, decrease, or no effect, and by how much?</p>`,
+ a:ans("Increase by $300 (20% of $1,500)")+
+ `<p>The retailer does not control the insurance service before it is transferred; the insurer is the principal. The retailer is an <b>agent</b> and reports only its net commission: $1,500 × 20% = $300. The $1,800 retail price is irrelevant to the retailer's books. Reporting the full $1,500 would overstate revenue (with a matching $1,200 cost of revenue and the same gross profit).</p>`},
+{t:"REV", q:`<p>An airline defers the portion of ticket revenue attributable to frequent flyer miles and recognizes it when miles are redeemed. Its "Loyalty program deferred revenue" balance was $9,300 million at December 31, 2025 and $8,800 million at December 31, 2024. Ignore operating expense and tax effects.</p>
+<p>Had the airline always recognized the full ticket price as passenger revenue when transportation is provided, would each of the following be higher, lower, or the same, and by how much? Passenger revenue in 2025, total stockholders' equity at December 31, 2025, total assets at December 31, 2025.</p>`,
+ a:ans("Passenger revenue 2025 higher by $500M · Equity higher by $9,300M · Total assets the same")+
+ `<ul><li>Revenue: deferral grew by 9,300 − 8,800 = $500M in 2025, so new deferrals exceeded redemptions by $500M. Without deferral that $500M is 2025 revenue.</li>
+<li>Equity: the whole $9,300M liability would have already passed through income. Retained earnings and total equity higher by $9,300M.</li>
+<li>Assets: cash is identical. On the balance sheet the liability falls and equity rises by the same $9,300M, leaving total assets unchanged.</li></ul>`},
+{t:"REV", q:`<p>A retailer defers 2% of Executive members' purchases as a reward liability ("Accrued member rewards"), reduced by an estimate of rewards that will never be redeemed (breakage). You believe breakage estimates have been too high and that Accrued member rewards should be higher by $175 million at the end of fiscal 2025 and higher by $195 million at the end of fiscal 2024. Ignore taxes.</p>
+<p>Under your estimates, would each be higher, lower, or the same, and by how much? Total equity at end of 2025, operating income in 2025, cash from operations in 2025.</p>`,
+ a:ans("Equity lower by $175M · Operating income higher by $20M · Cash from operations the same")+
+ `<ul><li>A larger reward liability means more revenue deferred cumulatively. Equity at end of 2025 is lower by the ending difference, $175M.</li>
+<li>During 2025 the extra deferral <em>shrank</em> from $195M to $175M, so $20M more net revenue would have been recognized in 2025 than currently. Operating income higher by $20M.</li>
+<li>Breakage is an estimate. Members paid the same cash, so CFO is unchanged.</li></ul>
+<p class="note">Watch the direction: "liability should be higher" at year end always means cumulative income lower by the ending amount, but the current-year effect depends on the <em>change</em> between the two year ends.</p>`},
+
+// ---------- Receivables ----------
+{t:"AR", q:`<p>A manufacturer uses the allowance method. Fiscal 2025 data ($ millions):</p>
+${tbl([["","End FY2025","End FY2024"],["Accounts receivable, net","2,565","2,480"],["Allowance for doubtful accounts","135","120"]])}
+<p>Bad debt expense (provision) in 2025 was $60 million. (a) What percentage of gross receivables does the company expect not to collect at the end of 2025? (b) What were write-offs in 2025?</p>`,
+ a:ans("(a) 5.0% · (b) Write-offs = $45 million")+
+ `<div class="calc">Gross AR = net + allowance = 2,565 + 135 = 2,700
+Expected uncollectible = 135 / 2,700 = 5.0%
+
+Allowance roll-forward:
+  120 beginning + 60 provision - write-offs = 135 ending
+  write-offs = 120 + 60 - 135 = 45</div>
+<p>Always compute the percentage against <em>gross</em> receivables. The allowance roll-forward is the single most reusable formula in this topic.</p>`},
+{t:"AR", q:`<p>Same manufacturer: allowance for doubtful accounts $135 million at the end of 2025, provision $60 million, write-offs $45 million. Ignore taxes.</p>
+<p>Had the company lowered by $15 million the amount of receivables it expects not to collect at the end of 2025, would each be higher, lower, or the same, and by how much? Total stockholders' equity at the end of 2025, and write-offs in 2025.</p>`,
+ a:ans("Equity higher by $15M · Write-offs the same")+
+ `<ul><li>A lower desired ending allowance means a smaller 2025 provision ($45M instead of $60M). Bad debt expense falls by $15M, so net income, retained earnings, and equity are higher by $15M. Net receivables are also higher by $15M.</li>
+<li>Write-offs are driven by which specific customers actually fail to pay. Changing the estimate does not change who defaulted, so write-offs are unchanged.</li></ul>`},
+{t:"AR", q:`<p>Same manufacturer: allowance $135 million at the end of 2025, provision $60 million, write-offs $45 million in 2025. Ignore taxes.</p>
+<p>Had the company <em>always</em> used the direct (specific) write-off approach instead of the allowance method, would each be higher, lower, or the same, and by how much? Net earnings in 2025, retained earnings at end of 2025, total assets at end of 2025, cash from operations in 2025.</p>`,
+ a:ans("Net earnings higher by $15M · Retained earnings higher by $135M · Total assets higher by $135M · CFO the same")+
+ `<ul><li>Under direct write-off, 2025 bad debt expense equals actual write-offs ($45M) instead of the provision ($60M). Net earnings higher by $15M, which is also the increase in the allowance this year.</li>
+<li>Cumulatively, the ending allowance ($135M) is expense recognized ahead of actual defaults. With no allowance, retained earnings and gross-equals-net receivables (total assets) are both higher by $135M.</li>
+<li>No cash is involved in provisions or write-offs, so CFO is unchanged.</li></ul>`},
+{t:"AR", q:`<p>A company's policy is to write off receivables after eight months without payment, but the Controller may write off a material account sooner. In February 2025 the Controller wrote off an $8 million receivable from an international customer facing political unrest. The auditors agreed.</p>
+<p>Had the company <em>not</em> written off this $8 million in fiscal 2025, would net earnings in 2025 be higher, lower, or the same, and by how much? Assume this is the only change.</p>`,
+ a:ans("The same")+
+ `<p>Under the allowance method a write-off reduces gross receivables and the allowance by equal amounts. It bypasses the income statement entirely. Net receivables, net earnings, and equity are all unaffected by whether or when the specific account is written off.</p>
+<p class="note">The income effect happened earlier, when the provision was recorded. The one caveat you could state: if management set the ending allowance as a percentage of gross receivables, keeping the $8M in gross AR could change the provision. The exam answer, absent that, is "the same".</p>`},
+{t:"AR", q:`<p>A company's gross receivables at year end are $2,700 million with an allowance of $135 million (net $2,565 million). Just before year end it sells (divests) its entire receivables portfolio to a bank, transferring all risks and rewards, for an amount $30 million below the amount owed. Ignore taxes.</p>
+<p>Would net sales for the year and total assets at year end be higher, lower, or the same, and by how much?</p>`,
+ a:ans("Net sales the same · Total assets higher by $105M")+
+ `<div class="calc">Cash received   = 2,700 - 30 = 2,670
+Net book value removed       = 2,565
+Gain on sale    = 2,670 - 2,565 = 105</div>
+<ul><li>Selling receivables is a financing/asset sale, not a sale of product. Net sales do not change.</li>
+<li>The company swaps $2,565M of net receivables for $2,670M of cash. Assets rise by $105M, and a $105M gain flows to income. The $30M discount is smaller than the $135M allowance, which is why the sale produces a gain rather than a loss.</li></ul>`},
+{t:"AR", q:`<p>Company A expects not to collect 5.0% of its gross receivables. A close competitor expects not to collect 1.0%.</p>
+<p>Give at least two possible explanations for the difference.</p>`,
+ a:ans("Any two of: different customer mix or credit quality; different credit terms or aging; different write-off timing policy; different estimation conservatism (earnings management incentives); different geographic exposure")+
+ `<ul><li><b>Customer base</b>: more small or international customers, or more exposure to distressed channels, justifies a higher reserve.</li>
+<li><b>Credit terms and aging</b>: longer terms or an older aging profile raise expected losses.</li>
+<li><b>Write-off policy</b>: a firm that writes off slowly keeps bad accounts in gross AR, which inflates the allowance percentage; a fast write-off policy shrinks it.</li>
+<li><b>Managerial discretion</b>: a higher allowance can be a "cookie jar" (overstating expense now to release later), or the competitor may be understating expense to boost earnings.</li></ul>`},
+
+// ---------- Inventories ----------
+{t:"INV", q:`<p>A diversified manufacturer uses LIFO for one segment and FIFO elsewhere. Fiscal 2025 data ($ millions):</p>
+${tbl([["","End FY2025","End FY2024"],["Total inventories (balance sheet)","4,400","4,150"],["of which carried at LIFO","1,600","1,500"],["LIFO reserve (from the note)","900","700"]])}
+<p>(a) What is your best estimate of the current replacement cost of total inventories at the end of 2025? (b) Were the prices the LIFO segment paid in 2025 generally rising, falling, or flat? Assume no LIFO liquidation.</p>`,
+ a:ans("(a) ≈ $5,300 million · (b) Rising")+
+ `<div class="calc">Replacement cost ≈ FIFO cost = LIFO carrying amount + LIFO reserve
+                 = 4,400 + 900 = 5,300</div>
+<ul><li>The FIFO-carried inventories (2,800) already approximate current cost, so only the LIFO reserve needs to be added. The reserve applies to the whole balance, not just the LIFO portion.</li>
+<li>The LIFO reserve grew by $200M with no liquidation. Under LIFO the newest (most expensive) units go to COGS, so a growing gap between FIFO and LIFO cost means purchase prices rose during 2025.</li></ul>`},
+{t:"INV", q:`<p>Same manufacturer: LIFO reserve $900 million at the end of 2025 and $700 million at the end of 2024, no LIFO liquidation. Assume a 21% tax rate that has not changed, all taxes paid in the year due, and that LIFO is used for tax purposes (LIFO conformity).</p>
+<p>Had the company always used FIFO for all inventories, would each be higher, lower, or the same, and by how much? Cost of sales in 2025, total shareholders' equity at end of 2025, cash from operations in 2025.</p>`,
+ a:ans("Cost of sales lower by $200M · Equity higher by $711M · Cash from operations lower by $42M")+
+ `<div class="calc">ΔLIFO reserve = COGS(LIFO) - COGS(FIFO) = 900 - 700 = 200  → FIFO COGS lower by 200
+Pre-tax income higher by 200; extra tax 200 x 21% = 42 → NI higher by 158
+Cumulative: inventories higher by 900; cumulative extra tax 900 x 21% = 189
+Equity higher by 900 - 189 = 711  (inventory +900, cash -189)
+CFO lower by 42 (more tax paid in 2025)</div>
+<p class="note">If the question says to ignore taxes, the answers become: COGS lower by 200, equity higher by 900, CFO the same. Read the instruction at the top of the part.</p>`},
+{t:"INV", q:`<p>A company's pro-forma analysis shows that had it always used LIFO for its U.S. inventories (instead of FIFO), cumulative income taxes paid through 2025 would have been lower by $210 million, while taxes paid in 2025 alone would have been higher by $42 million. Tax rate 21%, taxes paid when due.</p>
+<p>Under this always-LIFO scenario, would each be higher, lower, or the same, and by how much? Income before taxes in 2025, retained earnings at end of 2025, total inventories at end of 2024 (the prior year end). Were U.S. purchase prices rising or falling in 2025?</p>`,
+ a:ans("Pre-tax income 2025 higher by $200M · Retained earnings lower by $790M · Inventories at end of 2024 lower by $1,200M · Prices were falling in 2025")+
+ `<div class="calc">2025 taxes higher by 42 → pre-tax income higher by 42 / 0.21 = 200
+Cumulative taxes lower by 210 → cumulative pre-tax income lower by 210 / 0.21 = 1,000
+   → ending LIFO reserve (end 2025) = 1,000; retained earnings lower by 1,000 x (1 - 0.21) = 790
+Reserve at end 2024 = 1,000 + 200 = 1,200 (reserve fell by 200 during 2025) → inventories lower by 1,200</div>
+<p>A LIFO reserve that <em>shrinks</em> with no liquidation signals falling prices: LIFO COGS was lower than FIFO COGS in 2025. (Mirror image of the Honeywell inventories assignment.)</p>`},
+{t:"INV", q:`<p>A food company uses LIFO for its U.S. business and FIFO internationally, with a periodic system. Just before year end it buys $25 million of wheat, split equally between the two businesses, at the highest price per ton in years. Payment is due two months after year end.</p>
+<p>Consider the hypothetical in which the purchase was <em>not</em> made. Which statements are true? (i) Gross profit for the U.S. business would be higher. (ii) Gross profit for the international business would be higher. (iii) Cash from operations would be lower for both businesses. (iv) Cash from operations would be unchanged for both.</p>`,
+ a:ans("(i) and (iv) are true")+
+ `<ul><li><b>U.S. (LIFO)</b>: under periodic LIFO, the last units purchased are the first assigned to COGS. The expensive year-end layer flows straight into 2025 cost of sales. Without the purchase, COGS is lower and gross profit higher.</li>
+<li><b>International (FIFO)</b>: the new layer sits in ending inventory at cost. COGS and gross profit are unchanged.</li>
+<li><b>Cash</b>: the purchase was on account and unpaid at year end. Inventory up, payables up, no cash moved. CFO unchanged for both either way.</li></ul>
+<p class="note">This is the classic LIFO critique: year-end purchasing decisions can manipulate reported income.</p>`},
+{t:"INV", q:`<p>A company computes cost of sales using a periodic system. Had it instead used a perpetual system, inventories would have been higher by $235 million at the end of 2025 and higher by $215 million at the end of 2024. Ignore taxes.</p>
+<p>Had the company always used the perpetual approach, would cost of sales in 2025 and cash from operations in 2025 be higher, lower, or the same, and by how much?</p>`,
+ a:ans("Cost of sales lower by $20M · Cash from operations the same")+
+ `<div class="calc">COGS = beginning inventory + purchases - ending inventory
+Beginning higher by 215, ending higher by 235, purchases the same
+→ COGS lower by 235 - 215 = 20</div>
+<p>Purchases and payments are identical under either system; only the allocation between inventory and expense differs. CFO is unchanged. Equity at end of 2025 would be higher by $235M.</p>`},
+{t:"INV", q:`<p>IFRS prohibits LIFO; U.S. GAAP permits it.</p>
+<p>Give one argument supporting the IFRS prohibition and one argument supporting the U.S. GAAP position.</p>`,
+ a:ans("Against LIFO: balance sheet shows stale costs and income is manipulable through year-end purchases. For LIFO: income statement matches current costs against current revenues, and the tax conformity rule means firms would lose a real tax deferral without it.")+
+ `<ul><li><b>IFRS view</b>: LIFO inventory can be decades old and far below replacement cost; LIFO rarely matches physical flow; liquidations create artificial profits; comparability across firms suffers.</li>
+<li><b>U.S. GAAP view</b>: in inflationary periods LIFO COGS better reflects current cost, so margins are not inflated by holding gains; the LIFO reserve disclosure lets analysts convert to FIFO; removing LIFO for books would, through conformity, remove a legitimate cash-tax benefit.</li></ul>`},
+
+// ---------- Fixed assets ----------
+{t:"PPE", q:`<p>Fiscal 2025 data for a company's property, plant and equipment ($ millions). All capex was cash. $30 million of PP&E also arrived through business acquisitions. All disposals were cash sales just before year end. No impairments.</p>
+${tbl([["","End FY2025","End FY2024"],["PP&E, gross","12,900","12,000"],["Accumulated depreciation","6,500","6,200"],["PP&E, net","6,400","5,800"]])}
+${tbl([["Cash flow statement 2025","Amount"],["Depreciation expense","700"],["Capital expenditures","(1,500)"],["Proceeds from sale of PP&E","180"]])}
+<p>(a) Original cost of PP&E sold, (b) net book value of PP&E sold, (c) gain or loss on sale?</p>`,
+ a:ans("(a) Cost $630M · (b) NBV $230M · (c) Loss of $50M")+
+ `<div class="calc">Gross:  12,000 + 1,500 capex + 30 acquired - cost sold = 12,900 → cost sold = 630
+Acc dep: 6,200 + 700 expense - acc dep on sold = 6,500 → removed = 400
+NBV sold = 630 - 400 = 230
+Gain/(loss) = proceeds 180 - NBV 230 = (50) loss</div>
+<p>Two roll-forwards, every time: gross cost and accumulated depreciation. The $50M loss would appear as an add-back in operating cash flows.</p>`},
+{t:"PPE", q:`<p>During fiscal 2025 a retailer retired old refrigeration equipment and donated it for free just before year end, recording a $225 million loss. There were no other disposals. Ignore taxes.</p>
+<p>Had the retailer not retired any equipment in 2025, would each be higher, lower, or the same, and by how much? Total assets at year end, cash from investing activities in 2025, net income in 2025.</p>`,
+ a:ans("Total assets higher by $225M · Cash from investing the same · Net income higher by $225M")+
+ `<ul><li>Donated for free means proceeds of zero, so the loss equals the net book value removed: $225M. Keeping the equipment keeps $225M of net PP&E on the books.</li>
+<li>No proceeds were received, so there is nothing in investing activities to remove. CFI unchanged.</li>
+<li>No disposal, no loss: net income higher by $225M (depreciation on the equipment was already recorded for the year, since disposal was at year end).</li></ul>`},
+{t:"PPE", q:`<p>A company sold equipment at the end of fiscal 2025 and recorded the sale. Suppose it had assumed a <em>longer</em> useful life for that equipment, such that accumulated depreciation up to the sale would have been lower by $75 million and 2025 depreciation expense on those assets lower by $15 million. Ignore taxes.</p>
+<p>Under the longer life, would each be higher, lower, or the same, and by how much? Net income in 2025, retained earnings at the end of 2024 (prior year end), total equity at the end of 2025.</p>`,
+ a:ans("Net income 2025 lower by $60M · Retained earnings at end of 2024 higher by $60M · Equity at end of 2025 the same")+
+ `<div class="calc">2025: depreciation lower by 15 (+15 to income)
+      NBV at sale higher by 75 → gain lower / loss higher by 75 (-75)
+      net effect on 2025 income = -60
+Prior years: of the 75 lower acc dep, 15 is 2025, so 60 relates to earlier years
+      → retained earnings at end of 2024 higher by 60
+End of 2025: asset is gone; cumulative income effect = +60 - 60 = 0 → equity unchanged</div>
+<p>Depreciation only allocates cost across periods. Once an asset is sold, total lifetime income is proceeds minus cost regardless of the useful life assumed.</p>`},
+{t:"PPE", q:`<p>A company expenses repairs and maintenance but capitalizes "improvements" and amortizes them. Capitalized improvements, net of accumulated amortization, were $700 million at the end of 2025 and $650 million at the end of 2024. Ignore taxes.</p>
+<p>Had the company always treated all improvements as maintenance expense, would each be higher, lower, or the same, and by how much? Net income in 2025, total equity at the end of 2025, cash from operations in 2025.</p>`,
+ a:ans("Net income lower by $50M · Equity lower by $700M · Cash from operations: insufficient information (lower by the amount capitalized in 2025)")+
+ `<ul><li>The net balance grew by $50M, so 2025 capitalization exceeded 2025 amortization by $50M. Expensing everything would add that net $50M to expense.</li>
+<li>Cumulatively the $700M on the balance sheet is cost not yet expensed; equity lower by $700M.</li>
+<li>CFO would be lower by the full amount <em>capitalized</em> in 2025 (reclassified from investing to operating). That amount equals 50 + amortization, and amortization was not given. If the question also gave amortization of, say, $120M, CFO would be lower by $170M.</li></ul>`},
+{t:"PPE", q:`<p>Equipment cost $100,000 with an expected 10-year life and 20% residual value, straight-line. It is sold at the end of year 4 for $65,000.</p>
+<p>What are annual depreciation, net book value at sale, and the gain or loss?</p>`,
+ a:ans("Depreciation $8,000 per year · NBV $68,000 · Loss of $3,000")+
+ `<div class="calc">Annual depreciation = (100,000 - 20,000) / 10 = 8,000
+Accumulated after 4 years = 32,000
+NBV = 100,000 - 32,000 = 68,000
+Gain/(loss) = 65,000 - 68,000 = (3,000)</div>
+<p>Gain or loss is always proceeds minus net book value at the date of sale. A different useful life would change the NBV and therefore the gain or loss, but not total cash.</p>`},
+
+// ---------- Intangibles, R&D, software ----------
+{t:"INT", q:`<p>During 2025 a company acquired two businesses for a combined $1,200 million in cash. The acquisition note shows goodwill recognized of $400 million and $150 million of identifiable intangibles.</p>
+<p>(a) Was the combined price higher, lower, or the same as the fair value of identifiable net assets acquired, and by how much? (b) What is your best estimate of the fair value of identifiable assets net of liabilities received? (c) Had an additional $1,300 million all-cash acquisition closed just before year end, would total equity be higher, lower, or the same?</p>`,
+ a:ans("(a) Higher by $400M (goodwill) · (b) $800M · (c) The same")+
+ `<div class="calc">Goodwill = price - fair value of identifiable net assets
+400 = 1,200 - FV(net assets) → FV(net assets) = 800</div>
+<ul><li>Goodwill is the premium over the fair value of identifiable net assets. It is only recorded in an acquisition and is not amortized (tested annually for impairment).</li>
+<li>An all-cash acquisition is an asset exchange: cash out, acquired assets plus goodwill in, liabilities assumed. Equity does not change at closing.</li></ul>`},
+{t:"INT", q:`<p>A company amortizes its trademarks. Accumulated amortization on trademarks at the end of 2025 is $210 million. An independent appraiser finds that the fair value of the trademarks exceeds their net book value by about $350 million. Ignore taxes.</p>
+<p>Had the company always classified the trademarks as indefinite-lived intangibles, would total assets at the end of 2025 be higher, lower, or the same, and by how much?</p>`,
+ a:ans("Higher by $210 million")+
+ `<p>Indefinite-lived intangibles are not amortized, so the $210M of cumulative amortization would never have been recorded; net book value (and total assets, and retained earnings) would be higher by that amount.</p>
+<p>The $350M fair value excess is a distractor. U.S. GAAP does not write intangibles <em>up</em> to fair value; it only writes them down on impairment. Since fair value exceeds book value, no impairment is needed either.</p>`},
+{t:"INT", q:`<p>A company expenses all R&D as incurred. An internal analysis shows that under the IFRS treatment (capitalize post-feasibility development costs, then amortize), depreciation and amortization would be higher and total assets higher as follows ($ millions). All R&D is cash-based. Ignore taxes.</p>
+${tbl([["","FY2025","FY2024","FY2023"],["D&A higher by","125","135","110"],["Total assets higher by (year end)","300","325","310"]])}
+<p>Under IFRS, would each be higher, lower, or the same, and by how much? Retained earnings at end of 2025, cash from investing in 2025, EBITDA in 2025, net income in 2025.</p>`,
+ a:ans("Retained earnings higher by $300M · Cash from investing lower by $100M · EBITDA higher by $100M · Net income lower by $25M")+
+ `<div class="calc">Capitalized in 2025 = ending asset - beginning asset + amortization
+                    = 300 - 325 + 125 = 100
+R&D expense lower by 100 (capitalized), amortization higher by 125
+Net income = +100 - 125 = -25
+EBITDA excludes amortization → +100
+CFI lower by 100 (capitalized development is an investing outflow); CFO higher by 100</div>
+<p>Retained earnings higher by the ending asset balance ($300M): that is cumulative cost not yet expensed. Note the asset is shrinking, which means R&D spending is below the amortization run rate.</p>`},
+{t:"INT", q:`<p>A company capitalizes some internally developed software costs. Net capitalized software was $507 million at the end of 2025 and $542 million at the end of 2024. Amortization of capitalized software in 2025 was $180 million. All costs are cash-based. Ignore taxes.</p>
+<p>Had the company never capitalized software development costs, would each be higher, lower, or the same, and by how much? Retained earnings at end of 2025, net income in 2025, cash from operations in 2025.</p>`,
+ a:ans("Retained earnings lower by $507M · Net income higher by $35M · Cash from operations lower by $145M")+
+ `<div class="calc">Capitalized in 2025 = 507 - 542 + 180 = 145
+Expensing: 2025 bears 145 of new spend but none of the 180 amortization
+  → expense lower by 180 - 145 = 35 → NI higher by 35 (balance fell by 35)
+CFO lower by 145 (the cash paid moves from investing to operating)</div>
+<p>Expensing lowers income only in years when the capitalized balance is <em>growing</em>. Here the balance shrank, so expensing would have raised income. This is the Software Development Costs quiz pattern.</p>`},
+{t:"INT", q:`<p>Under the IFRS R&D treatment, a company's total assets would be higher by $1,900 million at the end of 2025 but by $3,100 million at the end of 2023.</p>
+<p>Give two factors that could explain why the asset uplift is smaller in 2025 than in 2023.</p>`,
+ a:ans("Development spending has declined relative to amortization (older capitalized projects are amortizing off faster than new ones are added), and/or impairments or write-offs of capitalized projects that failed commercially; a shift in spending mix toward pre-feasibility research (expensed under IFRS too) also works")+
+ `<ul><li>Capitalized balance rolls forward as beginning + capitalized − amortization − impairments. A shrinking balance means outflows exceed inflows.</li>
+<li>Lower qualifying development spend, shorter useful lives, abandoned projects, or more spending on basic research (never capitalized) all reduce the gap.</li></ul>`},
+{t:"INT", q:`<p>A SaaS company capitalizes sales commissions and amortizes them over four years in marketing and sales expense. Data ($ millions):</p>
+${tbl([["","End FY2025","End FY2024"],["Costs capitalized to obtain contracts, current","1,146","926"],["Costs capitalized to obtain contracts, noncurrent","1,715","1,348"]])}
+<p>Amortization of capitalized commissions in 2025 was $1,058 million. (a) Commissions paid in 2025? (b) Had the company always expensed commissions when paid, how would retained earnings at end of 2025, total liabilities, and marketing and sales expense in 2025 differ?</p>`,
+ a:ans("(a) $1,645M paid · (b) Retained earnings lower by $2,861M · Liabilities the same · M&S expense higher by $587M")+
+ `<div class="calc">Total capitalized: end 2,861 (1,146 + 1,715); beginning 2,274 (926 + 1,348)
+Paid = 2,861 - 2,274 + 1,058 = 1,645
+Expense under immediate expensing = 1,645 vs 1,058 amortization → higher by 587</div>
+<p>The ending asset ($2,861M) is cash already paid but not yet expensed; retained earnings lower by that amount. Liabilities are untouched. Incentives for capitalizing: smooth and raise near-term income while growing, match cost to the multi-year revenue, and present stronger operating cash flow (payments shown as investing-like asset additions in working capital).</p>`},
+
+// ---------- Marketable securities ----------
+{t:"SEC", q:`<p>A company classifies all its marketable debt securities as available-for-sale. Net unrealized gains on these securities sitting in AOCI were $40 million at the end of fiscal 2025 and $15 million at the end of fiscal 2024. Ignore taxes.</p>
+<p>Had the company classified all of them as trading securities, would each be higher, lower, or the same, and by how much? Total assets at the end of 2025, other comprehensive income in 2025, retained earnings at the end of 2025, net income in 2025.</p>`,
+ a:ans("Total assets the same · OCI lower by $25M · Retained earnings higher by $40M · Net income higher by $25M")+
+ `<ul><li>Both classifications carry securities at fair value on the balance sheet, so assets and total equity are identical.</li>
+<li>The difference is <em>where</em> unrealized gains go: trading runs them through net income; AFS parks them in OCI/AOCI. The 2025 unrealized gain is 40 − 15 = $25M, so NI higher by 25 and OCI lower by 25. Cumulatively, $40M moves from AOCI to retained earnings.</li></ul>
+<p class="note">Incentive to pick AFS: it keeps market swings out of earnings (less volatility), while still letting management realize gains into net income by choosing when to sell.</p>`},
+{t:"SEC", q:`<p>At year end a company holds corporate notes classified as available-for-sale with a cost of $3,300 million and a fair value of $3,336 million. The $36 million unrealized gain is in AOCI. Ignore taxes.</p>
+<p>Suppose the company had sold all the notes for $3,336 million just before year end. Would total stockholders' equity and net income be higher, lower, or the same, and by how much?</p>`,
+ a:ans("Total equity the same · Net income higher by $36M")+
+ `<p>The notes were already carried at $3,336M, so swapping them for $3,336M of cash leaves total assets and total equity unchanged. What changes is the composition of equity: the $36M unrealized gain is reclassified out of AOCI and recognized as a realized gain in net income, then into retained earnings.</p>
+<p class="note">Selling AFS winners is the classic way to "manufacture" earnings without changing economic value. Comprehensive income for the year is unchanged.</p>`},
+{t:"SEC", q:`<p>A company buys marketable debt securities at the end of Year 0 for $10 million. Fair value is $7 million at the end of Year 1 and $11 million at the end of Year 2. It sells them at the start of Year 3 for $13 million.</p>
+<p>For each year, what gain or loss is recognized in net income under (a) trading and (b) available-for-sale classification? What is the balance sheet carrying amount at the end of Year 1 under held-to-maturity?</p>`,
+ a:ans("Trading NI: (3), +4, +2 · AFS NI: 0, 0, +3 (with OCI of (3), +4, (1)) · HTM carrying amount at end of Year 1: $10M")+
+ `<div class="calc">            Yr1   Yr2   Yr3   Total
+Trading NI   (3)    4     2      3
+AFS    NI     0     0     3      3
+AFS    OCI   (3)    4    (1)     0
+HTM: carried at amortized cost (10), fair value changes not recognized</div>
+<p>Total gain recognized over the holding period is the same under every method ($3M). Classification only changes timing and location. Under AFS, the (1) in Year 3 OCI reverses the accumulated $1M of unrealized gain so that the full $3M realized gain can hit net income.</p>`},
+{t:"SEC", q:`<p>A company holds debt securities as available-for-sale and has $3 million of cumulative net unrealized gains in AOCI at year end.</p>
+<p>Had the company always classified all of these securities as held-to-maturity, would total assets and total shareholders' equity be higher, lower, or the same, and by how much? What about net income for the year?</p>`,
+ a:ans("Total assets lower by $3M · Equity lower by $3M (through AOCI) · Net income the same")+
+ `<p>Held-to-maturity securities stay at amortized cost. The $3M fair value uplift currently booked in AOCI would never have been recorded, so both assets and equity are lower by $3M. Net income is unaffected under either method because neither AFS nor HTM runs unrealized gains through earnings. Only interest revenue reaches net income.</p>`},
+
+// ---------- Financial statement analysis ----------
+{t:"FSA", q:`<p>Fiscal 2025 data ($ millions): net income 4,000; net sales 32,000; average total assets 60,000; average shareholders' equity 18,000.</p>
+<p>Decompose return on equity into profit margin, asset turnover, and financial leverage, and compute ROE and ROA.</p>`,
+ a:ans("ROE = 22.2% = 12.5% margin × 0.533 turnover × 3.33 leverage · ROA = 6.7%")+
+ `<div class="calc">Profit margin   = 4,000 / 32,000 = 12.5%
+Asset turnover  = 32,000 / 60,000 = 0.533
+Leverage        = 60,000 / 18,000 = 3.33
+ROE = 0.125 x 0.533 x 3.33 = 0.222
+ROA = 4,000 / 60,000 = 6.7%   (also margin x turnover)</div>
+<p>Accounting choices feed straight into these ratios: LIFO lowers margin and inventory; capitalizing raises assets and near-term margin; a larger allowance lowers both income and assets.</p>`},
+{t:"FSA", q:`<p>Fiscal 2025 data ($ millions): net sales 32,000; accounts receivable, net 7,000 at the beginning and 7,400 at the end of the year; cost of sales 22,000; inventories 4,150 at the beginning and 4,400 at the end.</p>
+<p>Compute receivables turnover, days sales outstanding, inventory turnover, and days inventory held.</p>`,
+ a:ans("Receivables turnover 4.44x, DSO ≈ 82 days · Inventory turnover 5.15x, days inventory ≈ 71 days")+
+ `<div class="calc">Avg AR = (7,000 + 7,400)/2 = 7,200
+AR turnover = 32,000 / 7,200 = 4.44 → DSO = 365 / 4.44 = 82 days
+Avg inventory = (4,150 + 4,400)/2 = 4,275
+Inventory turnover = 22,000 / 4,275 = 5.15 → days = 365 / 5.15 = 71 days</div>
+<p>Use net sales for receivables and cost of sales for inventory, with averages in the denominator. A LIFO firm's inventory turnover looks artificially high because LIFO inventory is carried at old, low costs; add back the LIFO reserve to compare with FIFO firms.</p>`},
+];
+
+// ---------- state & rendering ----------
+const topicKeys = Object.keys(T);
+let activeTopics = new Set(topicKeys);
+let order = CARDS.map((_,i)=>i);
+let pos = 0, flipped = false, missedOnly = false;
+let marks = {};
+try { marks = JSON.parse(localStorage.getItem("acct213-marks")||"{}") || {}; } catch(e){ marks = {}; }
+function saveMarks(){ try{ localStorage.setItem("acct213-marks", JSON.stringify(marks)); }catch(e){} }
+
+const $ = id => document.getElementById(id);
+function visible(){ return order.filter(i => activeTopics.has(CARDS[i].t) && (!missedOnly || marks[i]==="miss")); }
+
+function renderRail(){
+  const rail = $("rail"); rail.innerHTML = "";
+  const all = document.createElement("button"); all.className="chip"; all.textContent="All topics";
+  all.setAttribute("aria-pressed", activeTopics.size===topicKeys.length);
+  all.onclick = ()=>{ activeTopics = new Set(topicKeys); pos=0; renderAll(); };
+  rail.appendChild(all);
+  topicKeys.forEach(k=>{
+    const n = CARDS.filter(c=>c.t===k).length;
+    const b = document.createElement("button"); b.className="chip";
+    b.innerHTML = `${T[k]} <small>${n}</small>`;
+    const only = activeTopics.size===1 && activeTopics.has(k);
+    b.setAttribute("aria-pressed", only);
+    b.onclick = ()=>{ activeTopics = only ? new Set(topicKeys) : new Set([k]); pos=0; renderAll(); };
+    rail.appendChild(b);
+  });
+}
+function renderCard(){
+  const v = visible(); const card = $("card");
+  if(!v.length){
+    $("fTopic").textContent=""; $("fNum").textContent="";
+    $("fQ").innerHTML = `<div class="done"><h2>Nothing left in this filter</h2><p class="note">Turn off "Only missed" or pick another topic.</p></div>`;
+    $("bA").innerHTML=""; card.classList.remove("flipped"); flipped=false; updateTally(); return;
+  }
+  if(pos>=v.length) pos=0;
+  const c = CARDS[v[pos]];
+  card.classList.remove("flipped"); flipped=false;
+  $("fTopic").textContent = T[c.t];
+  $("fNum").textContent = $("bNum").textContent = `Card ${pos+1} of ${v.length}`;
+  $("fQ").innerHTML = c.q; $("bA").innerHTML = c.a;
+  $("prev").disabled = v.length<2; $("next").disabled = v.length<2;
+  $("bar").style.width = ((pos+1)/v.length*100)+"%";
+  card.querySelectorAll(".face").forEach(f=>f.scrollTop=0);
+  updateTally();
+}
+function updateTally(){
+  const v = visible();
+  const got = v.filter(i=>marks[i]==="got").length, miss = v.filter(i=>marks[i]==="miss").length;
+  $("tally").innerHTML = `${v.length} cards · <b>${got} got</b> · <span class="m">${miss} review</span>`;
+  $("tabMissed").setAttribute("aria-pressed", missedOnly); $("tabAll").setAttribute("aria-pressed", !missedOnly);
+  $("missedOnly").setAttribute("aria-pressed", missedOnly);
+  $("missedOnly").textContent = missedOnly ? "Show all" : "Only missed";
+  const g = $("tgrid"); g.innerHTML="";
+  topicKeys.forEach(k=>{
+    const ids = CARDS.map((c,i)=>c.t===k?i:-1).filter(i=>i>=0);
+    const tg = ids.filter(i=>marks[i]==="got").length, tm = ids.filter(i=>marks[i]==="miss").length;
+    const row = document.createElement("div"); row.className="trow";
+    row.innerHTML = `<span>${T[k]}</span><span>${tg}/${ids.length} got${tm?` · ${tm} review`:""}</span>`;
+    g.appendChild(row);
+  });
+}
+function renderAll(){ renderRail(); renderCard(); }
+function flip(){ flipped=!flipped; $("card").classList.toggle("flipped", flipped); }
+function step(d){ const v=visible(); if(v.length<2) return; pos=(pos+d+v.length)%v.length; renderCard(); }
+function mark(m){ const v=visible(); if(!v.length) return; marks[v[pos]]=m; saveMarks(); if(missedOnly && m==="got"){ renderCard(); } else { step(1); } }
+
+$("card").addEventListener("click", flip);
+$("card").addEventListener("keydown", e=>{ if(e.key==="Enter"){ e.preventDefault(); flip(); } });
+$("flip").onclick = flip; $("next").onclick=()=>step(1); $("prev").onclick=()=>step(-1);
+$("got").onclick=()=>mark("got"); $("missed").onclick=()=>mark("miss");
+$("shuffle").onclick=()=>{ for(let i=order.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [order[i],order[j]]=[order[j],order[i]]; } pos=0; renderCard(); };
+$("missedOnly").onclick=()=>{ missedOnly=!missedOnly; pos=0; renderCard(); };
+$("reset").onclick=()=>{ marks={}; saveMarks(); missedOnly=false; pos=0; renderCard(); };
+document.addEventListener("keydown", e=>{
+  if(e.target.tagName==="BUTTON" && e.key===" ") return;
+  if(e.key===" "){ e.preventDefault(); flip(); }
+  else if(e.key==="ArrowRight") step(1);
+  else if(e.key==="ArrowLeft") step(-1);
+  else if(e.key==="g"||e.key==="G") mark("got");
+  else if(e.key==="r"||e.key==="R") mark("miss");
+});
+$("tabAll").onclick=()=>{ missedOnly=false; pos=0; renderCard(); };
+$("tabMissed").onclick=()=>{ missedOnly=true; pos=0; renderCard(); };
+$("tabShuffle").onclick=()=>{ $("shuffle").click(); $("tabShuffle").setAttribute("aria-pressed","true"); setTimeout(()=>$("tabShuffle").setAttribute("aria-pressed","false"),600); };
+renderAll();
+</script>
+</body>
+</html>
